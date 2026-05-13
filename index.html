@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mike Lewis — Founder Coach &amp; Advisor</title>
+  <meta name="description" content="Mike Lewis helps founders and CEOs change not just how fast they move, but where they're going." />
+  <link rel="stylesheet" href="site.css" />
+  <script src="image-slot.js" defer></script>
+  <style>
+    /* Home-page-specific layout */
+
+    .hero {
+      padding: clamp(72px, 11vw, 160px) 0 clamp(72px, 9vw, 120px);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: end;
+    }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .hero h1 {
+      max-width: 13ch;
+    }
+    .hero .lede {
+      max-width: 36ch;
+      margin: 32px 0 36px;
+    }
+    .hero-portrait {
+      aspect-ratio: 3 / 4;
+      width: 100%;
+      max-width: 360px;
+      justify-self: end;
+    }
+    .hero-portrait image-slot {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 28px;
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Filmstrip — in-the-field photo slots */
+    .filmstrip {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper-2);
+      padding: clamp(40px, 5vw, 64px) 0;
+    }
+    .filmstrip-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 28px;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .filmstrip-head h3 {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-2);
+      letter-spacing: -0.01em;
+      max-width: 26ch;
+    }
+    .filmstrip-head .meta {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .filmstrip-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 800px) {
+      .filmstrip-grid { grid-template-columns: 1fr 1fr; }
+      .filmstrip-grid > :first-child { grid-column: span 2; }
+    }
+    @media (max-width: 520px) {
+      .filmstrip-grid { grid-template-columns: 1fr; }
+      .filmstrip-grid > :first-child { grid-column: span 1; }
+    }
+    .strip-slot {
+      aspect-ratio: 4 / 3;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .strip-slot image-slot { width: 100%; height: 100%; display: block; }
+    .strip-caption {
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Wide image break before closing */
+    .wide-slot {
+      aspect-ratio: 21 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .wide-slot image-slot { width: 100%; height: 100%; display: block; }
+
+    /* Section: Who this is for / disqualifier */
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .fit-grid { grid-template-columns: 1fr; } }
+    .fit-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .fit-list li {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 18px;
+      align-items: baseline;
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.8vw, 26px);
+      line-height: 1.3;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+    .fit-list li .idx {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .fit-list li em { font-style: italic; color: var(--accent-ink); }
+
+    .disqualifier {
+      border: 1px solid var(--rule-strong);
+      border-radius: 14px;
+      padding: 28px 26px;
+      background: var(--paper);
+      position: sticky;
+      top: 100px;
+    }
+    .disqualifier .eyebrow { color: var(--accent-ink); }
+    .disqualifier .eyebrow::before { background: var(--accent); }
+    .disqualifier p {
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 300;
+      color: var(--ink-2);
+      margin: 16px 0 0;
+    }
+
+    /* Four cards — what Mike does */
+    .four-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 1000px) { .four-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .four-cards { grid-template-columns: 1fr; } }
+
+    .pill-card {
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: var(--paper);
+      min-height: 280px;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .pill-card:hover { background: var(--paper-2); border-color: var(--rule-strong); }
+    .pill-card .role {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pill-card h3 {
+      font-size: 28px;
+      letter-spacing: -0.015em;
+    }
+    .pill-card p {
+      color: var(--ink-2);
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.5;
+    }
+    .pill-card .glyph {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--paper-3);
+      border: 1px solid var(--rule-strong);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--accent-ink);
+      margin-bottom: 4px;
+    }
+
+    /* Outcomes — hairline list with growth column */
+    .outcomes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+    @media (max-width: 900px) { .outcomes { grid-template-columns: 1fr; gap: 24px; } }
+
+    /* Principles — pull-quotes layout */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .principle {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 28px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .principle .pnum {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      color: var(--accent-ink);
+    }
+    .principle h3 {
+      font-size: clamp(22px, 1.9vw, 28px);
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .principle h3 em { color: var(--accent-ink); font-style: italic; }
+    .principle p { color: var(--muted); margin: 0; font-size: 14.5px; }
+
+    .principles .p1 { grid-column: span 7; }
+    .principles .p2 { grid-column: span 5; }
+    .principles .p3 { grid-column: span 5; }
+    .principles .p4 { grid-column: span 7; }
+    .principles .p5 { grid-column: span 12; padding-bottom: 0; border-bottom: 1px solid var(--rule); }
+    @media (max-width: 900px) {
+      .principles > div { grid-column: span 12 !important; }
+    }
+
+    /* Explore further tiles */
+    .explore {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 1000px) { .explore { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .explore { grid-template-columns: 1fr; } }
+
+    /* Closing CTA */
+    .closing {
+      background: var(--ink);
+      color: var(--paper);
+      border-top: 1px solid var(--ink);
+    }
+    .closing .eyebrow { color: var(--muted-2); }
+    .closing .eyebrow::before { background: var(--muted-2); }
+    .closing h2 {
+      color: var(--paper);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      max-width: 18ch;
+    }
+    .closing h2 em { color: oklch(0.78 0.10 240); font-style: italic; }
+    .closing p { color: color-mix(in oklab, var(--paper) 70%, transparent); max-width: 50ch; }
+    .closing .btn {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+    .closing .btn:hover { background: transparent; color: var(--paper); }
+    .closing .btn.ghost {
+      background: transparent;
+      color: var(--paper);
+      border-color: color-mix(in oklab, var(--paper) 40%, transparent);
+    }
+    .closing .btn.ghost:hover { background: var(--paper); color: var(--ink); }
+    .closing .hr-soft { background: color-mix(in oklab, var(--paper) 20%, transparent); }
+  </style>
+</head>
+<body>
+
+<header class="nav" data-screen-label="Home Nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow reveal">Founder Coach · Advisor · Operator</p>
+          <h1 class="reveal" style="margin-top:28px;">
+            Helping <em>great founders</em> become <em>great CEOs</em>.
+          </h1>
+          <p class="lede reveal">
+            Your startup is unique. Your problems are not. I've been a founder,
+            a CEO, an operator, and an investor, and I've worked with hundreds
+            of startups — as have my partners at ETW. We've seen this movie
+            before, and we're here to help founders avoid the errors that have
+            doomed so many others.
+          </p>
+          <div class="cta-row reveal">
+            <a href="work-with-me.html" class="btn">Work with Mike <span class="arrow">→</span></a>
+            <a href="my-background.html" class="btn ghost">My background</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait reveal">
+          <image-slot
+            id="mike-portrait"
+            shape="rounded"
+            radius="6px"
+            placeholder="Drop in a black-and-white portrait of Mike — roughly 3:4, neutral background, eye contact.">
+          </image-slot>
+        </div>
+      </div>
+
+      <div class="hero-meta reveal">
+        <span><span class="dot"></span> ETW Partner</span>
+        <span>San Francisco · Worldwide</span>
+        <span>By application</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILMSTRIP -->
+  <section class="filmstrip" data-screen-label="Home / Filmstrip">
+    <div class="wrap">
+      <div class="filmstrip-head reveal">
+        <h3>In the field. Working sessions, offsites, late-night calls.</h3>
+        <span class="meta">In the room</span>
+      </div>
+      <div class="filmstrip-grid reveal">
+        <div>
+          <div class="strip-slot">
+            <image-slot
+              id="strip-1"
+              shape="rounded"
+              radius="6px"
+              placeholder="Wide shot — Mike at a whiteboard or offsite, mid-session.">
+            </image-slot>
+          </div>
+          <p class="strip-caption">Working session</p>
+        </div>
+        <div>
+          <div class="strip-slot">
+            <image-slot
+              id="strip-2"
+              shape="rounded"
+              radius="6px"
+              placeholder="Mike with a founder — candid, two-shot.">
+            </image-slot>
+          </div>
+          <p class="strip-caption">With a founder</p>
+        </div>
+        <div>
+          <div class="strip-slot">
+            <image-slot
+              id="strip-3"
+              shape="rounded"
+              radius="6px"
+              placeholder="On stage / panel / event — Mike speaking.">
+            </image-slot>
+          </div>
+          <p class="strip-caption">Speaking</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I ACTUALLY DO -->
+  <section data-screen-label="Home / What I do">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">01 · Practice</span></div>
+        <div>
+          <h2>What I actually <em>do</em>.</h2>
+          <p class="muted" style="max-width:52ch; margin-top:20px;">
+            Four problems I help founders solve. Most engagements
+            touch all of them.
+          </p>
+        </div>
+      </div>
+
+      <div class="four-cards">
+        <article class="pill-card reveal">
+          <span class="glyph">M</span>
+          <span class="role">01 · Milestone</span>
+          <h3>Hit your milestone.</h3>
+          <p>Fundraise, profitability, sale — there's a finish line you're running at, and something's keeping you from it. We find it, work backwards from the goal, and avoid the cliff.</p>
+        </article>
+        <article class="pill-card reveal">
+          <span class="glyph">G</span>
+          <span class="role">02 · GTM</span>
+          <h3>GTM that compounds.</h3>
+          <p>When the curve isn't bending, we pull GTM apart and iterate until it does. Understand the motion you actually have, then build the one you need.</p>
+        </article>
+        <article class="pill-card reveal">
+          <span class="glyph">H</span>
+          <span class="role">03 · Team</span>
+          <h3>Hire A-players.</h3>
+          <p>Your team is your company's DNA. The better the team, the more you can run in parallel — and the faster the company can move. We sharpen the bar and the process behind it.</p>
+        </article>
+        <article class="pill-card reveal">
+          <span class="glyph">L</span>
+          <span class="role">04 · Leverage</span>
+          <h3>Get leverage.</h3>
+          <p>Working harder isn't the answer. You have to lead people, not be the bottleneck on every problem. Which means working on yourself first.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BREAK -->
+  <section style="background:var(--paper-2);" data-screen-label="Home / Quote">
+    <div class="wrap" style="max-width: 1000px;">
+      <p class="eyebrow reveal" style="margin-bottom:24px;">From a client</p>
+      <p class="quote reveal">
+        "He doesn't help you feel better about the company. He helps you
+        <em>see</em> it. After that, you can't unsee — which is exactly the point."
+      </p>
+      <p class="attribution reveal">CEO · Series&nbsp;B SaaS · 220 people</p>
+    </div>
+  </section>
+
+  <!-- EXPLORE FURTHER -->
+  <section data-screen-label="Home / Explore">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">02 · Explore</span></div>
+        <h2>Go <em>deeper</em>.</h2>
+      </div>
+
+      <div class="explore">
+        <a class="tile reveal" href="my-background.html">
+          <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0 0 24px;">Background</p>
+          <h3>My background.</h3>
+          <div class="arrow-row">
+            <span class="label">Operator, CEO, investor</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+        <a class="tile reveal" href="work-with-me.html">
+          <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0 0 24px;">Engagement</p>
+          <h3>Work with me.</h3>
+          <div class="arrow-row">
+            <span class="label">By application</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+        <a class="tile reveal" href="companies.html">
+          <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0 0 24px;">Founders</p>
+          <h3>Companies.</h3>
+          <div class="arrow-row">
+            <span class="label">Quotes, video, cases</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+        <a class="tile reveal" href="writing.html">
+          <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0 0 24px;">Writing</p>
+          <h3>Mike &amp; Ned's Links.</h3>
+          <div class="arrow-row">
+            <span class="label">Weekly + essays</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing" data-screen-label="Home / Closing">
+    <div class="wrap">
+      <div class="section-head reveal" style="grid-template-columns: 220px 1fr;">
+        <div class="label"><span class="eyebrow">Next</span></div>
+        <h2>Interested in <em>working together</em>?</h2>
+      </div>
+      <p class="reveal" style="font-size:20px; line-height:1.5; max-width:56ch; margin-bottom:36px;">
+        If you're building something meaningful and want sharper thinking,
+        harder truth, and stronger execution, let's talk.
+      </p>
+      <div class="cta-row reveal">
+        <a href="contact.html" class="btn">Get in touch <span class="arrow">→</span></a>
+        <a href="my-background.html" class="btn ghost">Read first</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Site v0.1 — placeholder copy</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

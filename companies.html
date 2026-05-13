@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Companies — Mike Lewis</title>
+  <link rel="stylesheet" href="site.css" />
+  <script src="image-slot.js" defer></script>
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 96px); }
+    .page-hero h1 { max-width: 16ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 60ch; }
+    .page-hero .tabs {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px;
+    }
+    .page-hero .tabs a {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 999px;
+      color: var(--muted);
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .page-hero .tabs a:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* Videos ----------------------------------------------------- */
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 1000px) { .videos { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .videos { grid-template-columns: 1fr; } }
+    .video-card {
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--paper);
+      display: flex; flex-direction: column;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      cursor: pointer;
+    }
+    .video-card:hover { background: var(--paper-2); border-color: var(--rule-strong); }
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--paper-3);
+    }
+    .video-thumb image-slot { width: 100%; height: 100%; display: block; }
+    .video-thumb .play {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .video-thumb .play .disc {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: color-mix(in oklab, var(--ink) 86%, transparent);
+      color: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 4px 24px color-mix(in oklab, var(--ink) 30%, transparent);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .video-card:hover .video-thumb .play .disc { transform: scale(1.06); background: var(--ink); }
+    .video-thumb .duration {
+      position: absolute;
+      right: 12px; bottom: 12px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.10em;
+      color: var(--paper);
+      background: color-mix(in oklab, var(--ink) 80%, transparent);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .video-meta {
+      padding: 20px 22px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+      flex: 1;
+    }
+    .video-meta h3 {
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: -0.012em;
+      line-height: 1.22;
+      font-family: var(--serif);
+    }
+    .video-meta h3 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .video-meta .who {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+    }
+    .video-meta .who .face {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .video-meta .who .face image-slot { width: 100%; height: 100%; display: block; }
+    .video-meta .who .who-text {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .video-meta .who .name {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .video-meta .who .role {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Quotes ----------------------------------------------------- */
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+    }
+    .quotes .q {
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 30px 28px;
+      background: var(--paper);
+      display: flex; flex-direction: column; gap: 18px;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .quotes .q:hover { background: var(--paper-2); border-color: var(--rule-strong); }
+    .quotes .q .mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 56px;
+      line-height: 0.5;
+      color: var(--accent);
+      height: 18px;
+    }
+    .quotes .q blockquote {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(19px, 1.6vw, 23px);
+      line-height: 1.35;
+      letter-spacing: -0.008em;
+      margin: 0;
+      color: var(--ink);
+    }
+    .quotes .q blockquote em { color: var(--accent-ink); font-style: italic; }
+    .quotes .q .who {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .quotes .q .who .face {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .quotes .q .who .face image-slot { width: 100%; height: 100%; display: block; }
+    .quotes .q .who .who-text { display: flex; flex-direction: column; gap: 2px; }
+    .quotes .q .who .name {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .quotes .q .who .role {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .quotes .q.lg { grid-column: span 4; }
+    .quotes .q.md { grid-column: span 3; }
+    .quotes .q.sm { grid-column: span 2; }
+    @media (max-width: 1000px) {
+      .quotes .q.lg, .quotes .q.md, .quotes .q.sm { grid-column: span 3; }
+    }
+    @media (max-width: 700px) {
+      .quotes { grid-template-columns: 1fr; }
+      .quotes .q.lg, .quotes .q.md, .quotes .q.sm { grid-column: span 1; }
+    }
+
+    /* Case studies ------------------------------------------------ */
+    .cases { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); }
+    .case {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr 1fr;
+      gap: 36px;
+      padding: 44px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    @media (max-width: 1000px) {
+      .case { grid-template-columns: 220px 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .case { grid-template-columns: 1fr; gap: 18px; }
+    }
+
+    .case .founder {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .case .founder .face {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-width: 200px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .case .founder .face image-slot { width: 100%; height: 100%; display: block; }
+    .case .founder .name {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .case .founder .meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .case .founder .meta .stage {
+      color: var(--accent-ink);
+      display: block;
+    }
+
+    .case .col-head {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .case .body {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.4vw, 20px);
+      font-weight: 300;
+      line-height: 1.4;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      margin: 0;
+    }
+    .case .body em { color: var(--accent-ink); font-style: italic; }
+    .case .body.result strong {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--accent-ink);
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html" class="active">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Companies">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Companies</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        Founders, in their <em>own words</em>.
+      </h1>
+      <p class="lede reveal">
+        Quotes, video conversations, and longer case studies from the founders
+        I've worked with — at ETW and before.
+      </p>
+      <div class="tabs reveal">
+        <a href="#videos">01 · Video</a>
+        <a href="#quotes">02 · Quotes</a>
+        <a href="#cases">03 · Case studies</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos" data-screen-label="Companies / Video">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">01 · Video</span></div>
+        <div>
+          <h2>Founders <em>on camera</em>.</h2>
+          <p class="muted" style="max-width:54ch; margin-top:20px;">
+            Short conversations — 3 to 6 minutes — about what changed and what
+            didn't.
+          </p>
+        </div>
+      </div>
+
+      <div class="videos">
+
+        <article class="video-card reveal">
+          <div class="video-thumb">
+            <image-slot
+              id="video-thumb-1"
+              shape="rect"
+              placeholder="Video still — founder mid-sentence, warm lighting.">
+            </image-slot>
+            <div class="play"><div class="disc">▶</div></div>
+            <span class="duration">04 : 12</span>
+          </div>
+          <div class="video-meta">
+            <h3>"He told me the thing my board <em>wouldn't</em>."</h3>
+            <div class="who">
+              <div class="face">
+                <image-slot
+                  id="video-face-1"
+                  shape="circle"
+                  placeholder="Founder headshot">
+                </image-slot>
+              </div>
+              <div class="who-text">
+                <span class="name">Founder name</span>
+                <span class="role">Series B · SaaS</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="video-card reveal">
+          <div class="video-thumb">
+            <image-slot
+              id="video-thumb-2"
+              shape="rect"
+              placeholder="Video still — founder in office, talking with hands.">
+            </image-slot>
+            <div class="play"><div class="disc">▶</div></div>
+            <span class="duration">05 : 38</span>
+          </div>
+          <div class="video-meta">
+            <h3>From <em>burnout</em> to operating cadence.</h3>
+            <div class="who">
+              <div class="face">
+                <image-slot
+                  id="video-face-2"
+                  shape="circle"
+                  placeholder="Founder headshot">
+                </image-slot>
+              </div>
+              <div class="who-text">
+                <span class="name">Founder name</span>
+                <span class="role">Series A · Fintech</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="video-card reveal">
+          <div class="video-thumb">
+            <image-slot
+              id="video-thumb-3"
+              shape="rect"
+              placeholder="Video still — two co-founders side by side.">
+            </image-slot>
+            <div class="play"><div class="disc">▶</div></div>
+            <span class="duration">06 : 04</span>
+          </div>
+          <div class="video-meta">
+            <h3>The conversation we'd been <em>avoiding</em>.</h3>
+            <div class="who">
+              <div class="face">
+                <image-slot
+                  id="video-face-3"
+                  shape="circle"
+                  placeholder="Co-founders headshot">
+                </image-slot>
+              </div>
+              <div class="who-text">
+                <span class="name">Co-founders</span>
+                <span class="role">Seed · Climate</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section id="quotes" style="background:var(--paper-2);" data-screen-label="Companies / Quotes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">02 · Quotes</span></div>
+        <h2>In their <em>words</em>.</h2>
+      </div>
+
+      <div class="quotes">
+
+        <article class="q lg reveal">
+          <span class="mark">"</span>
+          <blockquote>Mike P Lewis is <em>by far and away</em> the person you want in your corner during this fight. Best executive coach I have worked with by a long shot, and is highly recommended to any serious founder looking to take it to the next level.</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-lazarov" shape="circle" placeholder="Benjamin Lazarov headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Benjamin Lazarov</span>
+              <span class="role">Founder &amp; CEO · AnyCreek + Origin</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q sm reveal">
+          <span class="mark">"</span>
+          <blockquote>Great perspective, super insights and <em>high energy</em>. I've worked with him directly — just did a hike yesterday :-)</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-chen" shape="circle" placeholder="Steve Chen headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Steve Chen</span>
+              <span class="role">Founder &amp; CEO · Boldin</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q md reveal">
+          <span class="mark">"</span>
+          <blockquote>Mike P Lewis has been an amazing resource for us. Always asking the <em>right questions</em>, helping us strategize the right chess moves, and — probably most importantly — just a good human to do hard things with.</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-pontier" shape="circle" placeholder="Kyle Pontier headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Kyle Pontier</span>
+              <span class="role">Product &amp; Strategy Leader</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q md reveal">
+          <span class="mark">"</span>
+          <blockquote>Mike P Lewis has been awesome for Ajith and me. It feels like he's <em>part of our team</em>. TL;DR — work with Mike, it's your gift to yourself :)</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-joshi" shape="circle" placeholder="Avinash Joshi headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Avinash Joshi</span>
+              <span class="role">Co-Founder &amp; CTO · Cactus</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q sm reveal">
+          <span class="mark">"</span>
+          <blockquote>Highly recommend Mike P Lewis as an <em>executive coach</em>.</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-abenaim" shape="circle" placeholder="Henry Abenaim headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Henry Abenaim</span>
+              <span class="role">Founder &amp; CEO · FUNDINGO</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q sm reveal">
+          <span class="mark">"</span>
+          <blockquote>Highly recommend Mike P Lewis. <em>Tremendous</em> resource and person for founders to work with.</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-gooderham" shape="circle" placeholder="JP Gooderham headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">JP Gooderham</span>
+              <span class="role">CEO · Storyboard</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+        <article class="q sm reveal">
+          <span class="mark">"</span>
+          <blockquote>Mike P Lewis has been <em>amazing</em> for Avinash Joshi and me.</blockquote>
+          <div class="who">
+            <div class="face">
+              <image-slot id="q-face-satheesh" shape="circle" placeholder="Ajith Govind Satheesh headshot"></image-slot>
+            </div>
+            <div class="who-text">
+              <span class="name">Ajith Govind Satheesh</span>
+              <span class="role">Co-Founder &amp; CEO · Cactus</span>
+            </div>
+            <span class="via">LinkedIn</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="cases" data-screen-label="Companies / Cases">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">03 · Case studies</span></div>
+        <div>
+          <h2>What <em>changed</em>.</h2>
+          <p class="muted" style="max-width:54ch; margin-top:20px;">
+            Longer-form stories from inside the engagement. Identifying details
+            adjusted where requested.
+          </p>
+        </div>
+      </div>
+
+      <div class="cases reveal">
+
+        <div class="case">
+          <div class="founder">
+            <div class="face">
+              <image-slot id="case-face-1" shape="rounded" radius="6px" placeholder="Founder photo"></image-slot>
+            </div>
+            <div>
+              <p class="name">Founder name</p>
+              <p class="meta">
+                <span class="stage">Case · 01</span>
+                <span>Series A → B SaaS</span><br />
+                <span>14 months</span>
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="col-head">Problem</p>
+            <p class="body">Founder stuck running every important conversation. Org couldn't scale around him.</p>
+          </div>
+          <div>
+            <p class="col-head">Shift</p>
+            <p class="body">Built a leadership operating cadence; named the founder's <em>rescuing</em> pattern; redesigned the leadership team.</p>
+          </div>
+          <div>
+            <p class="col-head">Result</p>
+            <p class="body result"><strong>2× revenue</strong> over the engagement. Founder back to working on the few things only he can do.</p>
+          </div>
+        </div>
+
+        <div class="case">
+          <div class="founder">
+            <div class="face">
+              <image-slot id="case-face-2" shape="rounded" radius="6px" placeholder="Founder photo"></image-slot>
+            </div>
+            <div>
+              <p class="name">Co-founders</p>
+              <p class="meta">
+                <span class="stage">Case · 02</span>
+                <span>Seed marketplace</span><br />
+                <span>8 months</span>
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="col-head">Problem</p>
+            <p class="body">Two-founder team stalling on a pivot neither wanted to call.</p>
+          </div>
+          <div>
+            <p class="col-head">Shift</p>
+            <p class="body">Surfaced the unspoken disagreement. Forced a real decision. Designed the new GTM together.</p>
+          </div>
+          <div>
+            <p class="col-head">Result</p>
+            <p class="body result"><strong>Clear pivot</strong>, strongest quarter post-pivot, partnership still intact.</p>
+          </div>
+        </div>
+
+        <div class="case">
+          <div class="founder">
+            <div class="face">
+              <image-slot id="case-face-3" shape="rounded" radius="6px" placeholder="Founder photo"></image-slot>
+            </div>
+            <div>
+              <p class="name">CEO name</p>
+              <p class="meta">
+                <span class="stage">Case · 03</span>
+                <span>Series C consumer</span><br />
+                <span>2 years, ongoing</span>
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="col-head">Problem</p>
+            <p class="body">CEO under board pressure, leadership team drifting, personal capacity dropping.</p>
+          </div>
+          <div>
+            <p class="col-head">Shift</p>
+            <p class="body">Strategic clarity exercise with the board. Replaced two execs. Rebuilt the CEO's <em>operating rhythm</em>.</p>
+          </div>
+          <div>
+            <p class="col-head">Result</p>
+            <p class="body result"><strong>Beat plan</strong> two quarters in a row. CEO sleeping again.</p>
+          </div>
+        </div>
+
+        <div class="case">
+          <div class="founder">
+            <div class="face">
+              <image-slot id="case-face-4" shape="rounded" radius="6px" placeholder="Founder photo"></image-slot>
+            </div>
+            <div>
+              <p class="name">First-time founder</p>
+              <p class="meta">
+                <span class="stage">Case · 04</span>
+                <span>Pre-seed</span><br />
+                <span>4 months</span>
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="col-head">Problem</p>
+            <p class="body">First-time founder unable to commit to a single wedge.</p>
+          </div>
+          <div>
+            <p class="col-head">Shift</p>
+            <p class="body">Killed three of four product directions. Wrote the narrative. Practiced the raise.</p>
+          </div>
+          <div>
+            <p class="col-head">Result</p>
+            <p class="body result"><strong>Seed closed</strong> in six weeks. Conviction returned.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--ink); color:var(--paper);" data-screen-label="Companies / CTA">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="color:var(--muted-2); margin-bottom:24px;">Next</p>
+      <h2 class="reveal" style="color:var(--paper); max-width:22ch;">Want to be the <em style="color:oklch(0.78 0.10 240);">next</em> one?</h2>
+      <p class="reveal" style="font-size:20px; line-height:1.5; max-width:54ch; margin:24px 0 32px; color:color-mix(in oklab, var(--paper) 70%, transparent);">
+        Tell me what you're building and what's hard. Short and direct is fine.
+      </p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;" class="reveal">
+        <a href="contact.html" class="btn" style="background:var(--paper); color:var(--ink); border-color:var(--paper);">Get in touch <span class="arrow">→</span></a>
+        <a href="work-with-me.html" class="btn ghost" style="color:var(--paper); border-color: color-mix(in oklab, var(--paper) 40%, transparent);">See engagement details</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Site v0.2 — placeholder copy</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Background — Mike Lewis</title>
+  <link rel="stylesheet" href="site.css" />
+  <script src="image-slot.js" defer></script>
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 96px); }
+    .page-hero h1 { max-width: 16ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 56ch; font-size: clamp(22px, 2.1vw, 28px); }
+
+    .hero-cta {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 999px;
+      color: var(--ink-2);
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .ext-link:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .ext-link .arrow { font-family: var(--mono); }
+
+    /* ETW now-block */
+    .now-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .now-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+    .now-lede {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.4vw, 34px);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+    }
+    .now-lede em { color: var(--accent-ink); font-style: italic; }
+    .now-body {
+      margin-top: 28px;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 56ch;
+    }
+
+    .stat-stack {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .stat {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .stat .figure {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(32px, 3vw, 44px);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat .figure em { color: var(--accent-ink); font-style: italic; }
+    .stat .label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      max-width: 22ch;
+    }
+
+    /* ETW client list */
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 36px;
+    }
+    @media (max-width: 800px) { .client-grid { grid-template-columns: repeat(2, 1fr); } }
+    .client-pill {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      padding: 14px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink-2);
+      text-align: center;
+    }
+
+    /* Career timeline */
+    .career {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .role {
+      display: grid;
+      grid-template-columns: 140px 1fr 1.2fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    @media (max-width: 900px) {
+      .role { grid-template-columns: 1fr; gap: 14px; padding: 32px 0; }
+    }
+    .role .when {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+    }
+    .role .what h3 {
+      font-size: clamp(24px, 2.2vw, 32px);
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      font-weight: 400;
+      margin: 0 0 8px;
+    }
+    .role .what h3 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .role .what .where {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .role .detail {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.4vw, 20px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink-2);
+      letter-spacing: -0.005em;
+    }
+    .role .detail em { color: var(--accent-ink); font-style: italic; }
+    .role .detail .meta-line {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* Photo split */
+    .photo-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 700px) { .photo-split { grid-template-columns: 1fr; } }
+    .photo-split .slot {
+      aspect-ratio: 4 / 5;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .photo-split .slot.wide { aspect-ratio: 5 / 4; }
+    .photo-split .slot image-slot { width: 100%; height: 100%; display: block; }
+
+    .personal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    @media (max-width: 800px) { .personal-grid { grid-template-columns: 1fr 1fr; } }
+    .pcard {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 22px 20px;
+      background: var(--paper);
+    }
+    .pcard .k {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .pcard .v {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .pcard .v em { color: var(--accent-ink); font-style: italic; }
+
+    /* Logo strip */
+    .logo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+      padding-top: 36px;
+      border-top: 1px solid var(--rule);
+    }
+    @media (max-width: 700px) {
+      .logo-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    .logo-slot {
+      position: relative;
+      aspect-ratio: 16 / 7;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--paper);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-slot image-slot {
+      width: 100%; height: 100%; display: block;
+      position: absolute; inset: 0;
+    }
+    .logo-slot .logo-fallback {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 300;
+      letter-spacing: -0.015em;
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="my-background.html" class="active">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="My Background">
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">About</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        Coach. Advisor. <em>Operator.</em> CEO.
+      </h1>
+      <p class="lede reveal">
+        I'm currently a coach and advisor to startup founders, as a partner at
+        <em class="italic">Enjoy The Work</em>. Before that I was CEO of Onward
+        and led product teams at Airbnb. Before that, two more companies. The
+        details below.
+      </p>
+      <div class="hero-cta reveal">
+        <a class="ext-link" href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">
+          LinkedIn <span class="arrow">↗</span>
+        </a>
+        <a class="ext-link" href="contact.html">
+          Get in touch <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOW · ETW -->
+  <section style="background:var(--paper-2);" data-screen-label="My Background / Now">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">Now · 2021 → today</span></div>
+        <h2>Partner, <em>Enjoy The Work</em>.</h2>
+      </div>
+
+      <div class="now-grid">
+        <div class="reveal">
+          <p class="now-lede">
+            ETW helps <em>great founders become great CEOs</em>.
+          </p>
+          <p class="now-body">
+            A partnership of ten experienced and successful former operators.
+            Since 2015, we've worked with more than 140 startups via immersive
+            1-on-1 coaching and advisory. Our companies have a combined value
+            of over $14B and are based all over the world — Tel Aviv, Karachi,
+            Montréal, London, New York, the San Francisco Bay Area.
+          </p>
+          <div class="client-grid">
+            <span class="client-pill">Tipalti</span>
+            <span class="client-pill">HoneyBook</span>
+            <span class="client-pill">Shef</span>
+            <span class="client-pill">Paper Education</span>
+            <span class="client-pill">Fieldin</span>
+            <span class="client-pill">inDinero</span>
+            <span class="client-pill">Realty Mogul</span>
+            <span class="client-pill">Fuse Ignited</span>
+            <span class="client-pill">Mudflap</span>
+            <span class="client-pill">4M Analytics</span>
+            <span class="client-pill">PeopleOne Health</span>
+            <span class="client-pill" style="border-style:dashed; color:var(--muted);">+ many more</span>
+          </div>
+        </div>
+
+        <div class="stat-stack reveal">
+          <div class="stat">
+            <span class="figure">10 <em>partners</em></span>
+            <span class="label">Former operators</span>
+          </div>
+          <div class="stat">
+            <span class="figure">140<em>+</em></span>
+            <span class="label">Startups worked with</span>
+          </div>
+          <div class="stat">
+            <span class="figure">$14B<em>+</em></span>
+            <span class="label">Combined company value</span>
+          </div>
+          <div class="stat">
+            <span class="figure">Since 2015</span>
+            <span class="label">Years operating</span>
+          </div>
+          <div class="stat">
+            <span class="figure">6 cities</span>
+            <span class="label">SF · NYC · London · Montréal · Karachi · Tel Aviv</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO SPLIT -->
+  <section style="padding-top: 0; padding-bottom: 0;" data-screen-label="My Background / Photos">
+    <div class="wrap" style="padding-top: clamp(48px,6vw,80px); padding-bottom: clamp(48px,6vw,80px);">
+      <div class="photo-split reveal">
+        <div class="slot wide">
+          <image-slot
+            id="bg-photo-1"
+            shape="rounded"
+            radius="6px"
+            placeholder="Mike with co-founders or team. Candid.">
+          </image-slot>
+        </div>
+        <div class="slot wide">
+          <image-slot
+            id="bg-photo-2"
+            shape="rounded"
+            radius="6px"
+            placeholder="Mike at work — desk, whiteboard, founder session.">
+          </image-slot>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER TIMELINE -->
+  <section style="background:var(--paper-2);" data-screen-label="My Background / Career">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">Career</span></div>
+        <div>
+          <h2>Before <em>ETW</em>.</h2>
+          <p class="muted" style="max-width:52ch; margin-top:20px;">
+            Three companies founded, funded, and grown. Three exits. Four years
+            inside Airbnb during the scaling years — from 400 employees to 9,000.
+          </p>
+        </div>
+      </div>
+
+      <div class="career reveal">
+
+        <div class="role">
+          <span class="when">2019 → 2021</span>
+          <div class="what">
+            <h3>Co-founder &amp; <em>CEO</em>.</h3>
+            <p class="where">Onward · acquired by Royal Ambulance</p>
+          </div>
+          <p class="detail">
+            We built the <em>largest ride-sharing service for seniors</em> in
+            California. Acquired by Royal Ambulance in 2021. An incredible run
+            with two co-founders who became friends.
+            <span class="meta-line">Co-founders: Nader Akhnoukh, Sarah Pontier</span>
+            <span class="meta-line">Investors: Matchstick · Royal Street</span>
+          </p>
+        </div>
+
+        <div class="role">
+          <span class="when">2015 → 2019</span>
+          <div class="what">
+            <h3><em>Product Lead</em>.</h3>
+            <p class="where">Airbnb · Lux + Airbnb for Work</p>
+          </div>
+          <p class="detail">
+            Four years inside Airbnb during the <em>scaling years</em> — from
+            roughly 400 employees to 9,000. Two years leading product for the
+            <em>Lux</em> business unit, managing 6 PMs across supply growth,
+            host and guest experience, concierge, payments, infra. Before that,
+            first product hire on <em>Airbnb for Work</em>: launched the first
+            product in Aug 2015 and grew the business from <em>$0 to $2B</em>
+            in revenue.
+            <span class="meta-line">6 PMs · 400 → 9,000 employees · $0 → $2B revenue</span>
+          </p>
+        </div>
+
+        <div class="role">
+          <span class="when">2009 → 2015</span>
+          <div class="what">
+            <h3>Co-founder.</h3>
+            <p class="where">Kapost · acquired by Upland Software</p>
+          </div>
+          <p class="detail">
+            B2B content marketing operations platform. Built it in Boulder with
+            Toby and Nader. Grew to <em>120 people</em> and <em>$15M ARR</em>.
+            Raised $16M from Floodgate, Salesforce, LeadEdge, and Cueball. Got
+            engaged, married, and had two kids along the way.
+            <span class="meta-line">Investors: Floodgate · Salesforce · LeadEdge · Cueball</span>
+          </p>
+        </div>
+
+        <div class="role">
+          <span class="when">2007 → 2008</span>
+          <div class="what">
+            <h3>Co-founder.</h3>
+            <p class="where">Qloud · acquired by BuzzMedia</p>
+          </div>
+          <p class="detail">
+            One of the early Facebook-platform apps — connected your iTunes to
+            Facebook so you could play music from your library or your friends'.
+            Grew to over <em>10M monthly users</em>. Acquired by BuzzMedia (now
+            SpinMedia) in early 2008.
+            <span class="meta-line">Investors / board: Steve Case · Jim Bankoff · Tom Ryan · Chris Blackwell · David Goldberg</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- LOGO STRIP -->
+      <div class="logo-strip reveal" aria-label="Companies">
+        <div class="logo-slot">
+          <image-slot
+            id="logo-airbnb"
+            shape="rect"
+            placeholder="Airbnb logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Airbnb</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-kapost"
+            shape="rect"
+            placeholder="Kapost logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Kapost</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-qloud"
+            shape="rect"
+            placeholder="Qloud logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Qloud</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-onward"
+            shape="rect"
+            placeholder="Onward logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Onward</span>
+        </div>
+      </div>
+
+      <p class="muted reveal" style="margin-top: 28px; font-size: 13.5px; max-width: 60ch;">
+        Twelve people at acquisition; many now running things. Pedro → CTO at
+        1Password (formerly VP Platform, Facebook). Jim DeLorenzo → Head of
+        Amazon Sports/Video. Noah → CEO of The Action Network.
+      </p>
+    </div>
+  </section>
+
+  <!-- PERSONAL -->
+  <section data-screen-label="My Background / Personal">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">Personal</span></div>
+        <h2>Briefly.</h2>
+      </div>
+
+      <div class="personal-grid reveal">
+        <div class="pcard">
+          <p class="k">Based</p>
+          <p class="v"><em>San Francisco</em> Bay Area</p>
+        </div>
+        <div class="pcard">
+          <p class="k">Family</p>
+          <p class="v">Two kids. One <em>traveling</em> partner.</p>
+        </div>
+        <div class="pcard">
+          <p class="k">Fun fact</p>
+          <p class="v">Been to <em>all 50 states</em>.</p>
+        </div>
+        <div class="pcard">
+          <p class="k">Cohort</p>
+          <p class="v">3× founder, 2 acquisitions, <em>4</em> companies.</p>
+        </div>
+        <div class="pcard">
+          <p class="k">Currently</p>
+          <p class="v">Coaching founders <em>1-on-1</em>.</p>
+        </div>
+        <div class="pcard">
+          <p class="k">Find me</p>
+          <p class="v">
+            <a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener" style="border-bottom: 1px solid var(--rule-strong); padding-bottom:2px;">LinkedIn</a> ·
+            <a href="contact.html" style="border-bottom: 1px solid var(--rule-strong); padding-bottom:2px;">Email</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--ink); color:var(--paper);" data-screen-label="My Background / CTA">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="color:var(--muted-2); margin-bottom:24px;">Next</p>
+      <h2 class="reveal" style="color:var(--paper); max-width: 22ch;">Curious if we'd <em style="color:oklch(0.78 0.10 240);">work well</em> together?</h2>
+      <p class="reveal" style="font-size:20px; line-height:1.5; max-width:54ch; margin:24px 0 32px; color:color-mix(in oklab, var(--paper) 70%, transparent);">
+        I take on a small number of engagements at a time. The way to start
+        is a short conversation.
+      </p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;" class="reveal">
+        <a href="work-with-me.html" class="btn" style="background:var(--paper); color:var(--ink); border-color:var(--paper);">See engagement details <span class="arrow">→</span></a>
+        <a href="contact.html" class="btn ghost" style="color:var(--paper); border-color: color-mix(in oklab, var(--paper) 40%, transparent);">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Site v0.2 — placeholder copy</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

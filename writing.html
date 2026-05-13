@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Writing — Mike Lewis</title>
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(48px, 6vw, 80px); }
+    .page-hero h1 { max-width: 18ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 60ch; }
+
+    /* ============== Mike & Ned's Links ============== */
+    .mnl {
+      background: var(--paper-2);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .mnl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(40px, 5vw, 80px);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .mnl-grid { grid-template-columns: 1fr; } }
+
+    .mnl-mast {
+      position: sticky;
+      top: 90px;
+    }
+    .mnl-mast .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+      padding: 7px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      margin-bottom: 24px;
+      background: color-mix(in oklab, var(--accent) 12%, transparent);
+    }
+    .mnl-mast .badge .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .mnl-mast h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -0.02em;
+      line-height: 0.98;
+      margin-bottom: 24px;
+    }
+    .mnl-mast h2 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .mnl-mast p {
+      font-family: var(--serif);
+      font-size: clamp(19px, 1.8vw, 24px);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--ink-2);
+      letter-spacing: -0.008em;
+      max-width: 32ch;
+      margin: 0 0 28px;
+    }
+    .mnl-mast .stats {
+      display: flex; gap: 28px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .mnl-mast .stat {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .mnl-mast .stat .num {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .mnl-mast .stat .num em { color: var(--accent-ink); font-style: italic; }
+    .mnl-mast .stat .label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .mnl-form {
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 420px;
+    }
+    .mnl-form .row {
+      display: flex; gap: 10px; align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .mnl-form .row .field { flex: 1; min-width: 220px; }
+    .mnl-form .row input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--ink);
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--ink);
+      width: 100%;
+      outline: none;
+    }
+    .mnl-form .helper {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .mnl-list {
+      display: flex; flex-direction: column;
+      border-top: 1px solid var(--rule);
+    }
+    .mnl-item {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 100px 1fr 40px;
+      gap: 24px;
+      align-items: baseline;
+      cursor: pointer;
+      transition: background .2s ease, padding-left .2s ease;
+    }
+    .mnl-item:hover { background: color-mix(in oklab, var(--paper) 50%, transparent); padding-left: 8px; padding-right: 8px; }
+    .mnl-item .nday {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+    }
+    .mnl-item .nday .num {
+      display: block;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 28px;
+      color: var(--ink);
+      margin-top: 4px;
+      letter-spacing: -0.01em;
+    }
+    .mnl-item h3 {
+      font-size: clamp(20px, 1.8vw, 24px);
+      font-weight: 400;
+      letter-spacing: -0.012em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .mnl-item h3 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .mnl-item .preview {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 60ch;
+    }
+    .mnl-item .preview strong {
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+    .mnl-item .arrow {
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--muted);
+      text-align: right;
+      align-self: center;
+    }
+    .mnl-item:hover .arrow { color: var(--accent-ink); }
+    @media (max-width: 700px) {
+      .mnl-item { grid-template-columns: 1fr; gap: 8px; }
+      .mnl-item .arrow { display: none; }
+    }
+
+    .mnl-list .more {
+      padding: 22px 0;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .mnl-list .more a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 3px;
+    }
+
+    /* ============== Essays ============== */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 24px 0 0;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .filters button {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 14px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 999px;
+      cursor: pointer;
+      background: transparent;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .filters button:hover { color: var(--ink); border-color: var(--ink); }
+    .filters button.active {
+      background: var(--ink); color: var(--paper); border-color: var(--ink);
+    }
+    .filters .count {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      align-self: center;
+    }
+
+    .featured {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: end;
+      padding-top: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+    @media (max-width: 900px) { .featured { grid-template-columns: 1fr; gap: 24px; } }
+    .featured .meta {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex; gap: 14px; align-items: center;
+    }
+    .featured .meta .tag { color: var(--accent-ink); }
+    .featured h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -0.018em;
+      line-height: 1.02;
+      margin-bottom: 18px;
+      font-weight: 400;
+    }
+    .featured h2 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .featured p { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 50ch; }
+    .featured .read {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 18px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+    }
+
+    .posts { display: grid; grid-template-columns: 1fr; }
+    .post {
+      display: grid;
+      grid-template-columns: 140px 1fr 200px;
+      gap: 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+    .post:hover { background: var(--paper-2); }
+    .post .date {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .post .date .tag { color: var(--accent-ink); margin-top: 6px; display: block; }
+    .post .body h3 {
+      font-size: clamp(24px, 2.3vw, 32px);
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+    .post .body h3 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
+    .post .body p { color: var(--ink-2); margin: 0; max-width: 60ch; line-height: 1.55; }
+    .post .read {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+    .post .read .arrow { display: block; margin-top: 6px; font-size: 18px; color: var(--ink); transition: transform .2s ease; }
+    .post:hover .read .arrow { transform: translateX(4px); color: var(--accent-ink); }
+    @media (max-width: 900px) {
+      .post { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+      .post .read { display: none; }
+    }
+    .post.hidden { display: none; }
+
+    /* Subscribe essays */
+    .sub-essays {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .sub-essays h2 { color: var(--paper); max-width: 22ch; }
+    .sub-essays h2 em { color: oklch(0.78 0.10 240); font-style: italic; font-weight: 300; }
+    .sub-essays p { color: color-mix(in oklab, var(--paper) 70%, transparent); }
+    .sub-essays .field label { color: color-mix(in oklab, var(--paper) 60%, transparent); }
+    .sub-essays .field input {
+      color: var(--paper);
+      border-bottom-color: color-mix(in oklab, var(--paper) 40%, transparent);
+    }
+    .sub-essays .field input:focus { border-bottom-color: var(--paper); }
+    .sub-essays .field input::placeholder { color: color-mix(in oklab, var(--paper) 40%, transparent); }
+    .sub-essays .btn {
+      background: var(--paper); color: var(--ink); border-color: var(--paper);
+    }
+    .sub-essays .btn:hover { background: transparent; color: var(--paper); }
+    .sub-essays-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 800px) { .sub-essays-grid { grid-template-columns: 1fr; gap: 24px; } }
+    .sub-essays-form {
+      display: flex; gap: 10px; align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .sub-essays-form .field { flex: 1; min-width: 240px; }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html" class="active">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Writing">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Writing</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        Weekly <em>links</em>. Occasional <em>blog posts</em>.
+      </h1>
+      <p class="lede reveal">
+        Two streams. <em class="italic">Mike &amp; Ned's Links</em> goes out
+        every week — the most interesting things we read, watched, or argued
+        about. <em class="italic">Blog posts</em> are longer notes from inside
+        founder conversations.
+      </p>
+    </div>
+  </section>
+
+  <!-- MIKE & NED'S LINKS -->
+  <section class="mnl" data-screen-label="Writing / Mike & Ned's Links">
+    <div class="wrap">
+
+      <div class="mnl-grid">
+
+        <div class="mnl-mast reveal">
+          <p class="badge"><span class="dot"></span> Weekly · Substack</p>
+          <h2>Mike &amp; Ned's <em>Links</em>.</h2>
+          <p>
+            A weekly link letter from two former operators. Tools, essays,
+            founder lessons, things we're chewing on.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <span class="num">109</span>
+              <span class="label">Issues so far</span>
+            </div>
+            <div class="stat">
+              <span class="num"><em>Weekly</em></span>
+              <span class="label">Cadence</span>
+            </div>
+            <div class="stat">
+              <span class="num">Free</span>
+              <span class="label">No paywall</span>
+            </div>
+          </div>
+
+          <a href="https://startupthoughts.substack.com/" target="_blank" rel="noopener" class="btn" style="align-self:flex-start;">
+            Read on Substack <span class="arrow">↗</span>
+          </a>
+          <p class="helper" style="margin-top:14px; font-family: var(--mono); font-size: 11px; letter-spacing:0.10em; text-transform:uppercase; color:var(--muted);">startupthoughts.substack.com</p>
+        </div>
+
+        <div class="reveal">
+          <div class="mnl-list">
+
+            <a class="mnl-item" href="https://startupthoughts.substack.com/" target="_blank" rel="noopener">
+              <span class="nday">Issue<span class="num">109</span></span>
+              <div>
+                <h3>The <em>latest</em> issue.</h3>
+                <p class="preview">
+                  <strong>This week →</strong> Tools, articles, and founder lessons. New issue every week on Substack. (Issue titles &amp; previews will pull from the feed once wired up.)
+                </p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://startupthoughts.substack.com/" target="_blank" rel="noopener">
+              <span class="nday">Issue<span class="num">108</span></span>
+              <div>
+                <h3>Recent issue.</h3>
+                <p class="preview">
+                  <strong>Preview placeholder.</strong> Pulls from the Substack feed.
+                </p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://startupthoughts.substack.com/" target="_blank" rel="noopener">
+              <span class="nday">Issue<span class="num">107</span></span>
+              <div>
+                <h3>Recent issue.</h3>
+                <p class="preview">
+                  <strong>Preview placeholder.</strong> Pulls from the Substack feed.
+                </p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://startupthoughts.substack.com/" target="_blank" rel="noopener">
+              <span class="nday">Issue<span class="num">106</span></span>
+              <div>
+                <h3>Recent issue.</h3>
+                <p class="preview">
+                  <strong>Preview placeholder.</strong> Pulls from the Substack feed.
+                </p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <div class="more">
+              <span>109 issues in the archive</span>
+              <a href="https://startupthoughts.substack.com/" target="_blank" rel="noopener">Browse on Substack ↗</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BLOG POSTS -->
+  <section data-screen-label="Writing / Blog posts">
+    <div class="wrap">
+
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">Blog posts</span></div>
+        <div>
+          <h2>Longer <em>notes</em>.</h2>
+          <p class="muted" style="max-width:54ch; margin-top:20px;">
+            Frameworks and observations from inside founder conversations.
+            Published when there's something worth saying. Read in full on
+            mikelewis.me.
+          </p>
+        </div>
+      </div>
+
+      <div class="filters reveal" id="filters">
+        <button class="active" data-tag="all">All</button>
+        <button data-tag="strategy">Strategy</button>
+        <button data-tag="leadership">Leadership</button>
+        <button data-tag="founder-psychology">Founder psychology</button>
+        <button data-tag="decisions">Decisions</button>
+        <button data-tag="org">Org &amp; team</button>
+        <button data-tag="execution">Execution</button>
+        <span class="count" id="count">10 posts</span>
+      </div>
+
+      <article class="featured reveal" data-tag="founder-psychology">
+        <div>
+          <p class="meta">
+            <span>Apr 27, 2026</span>
+            <span>·</span>
+            <span class="tag">Featured</span>
+          </p>
+          <h2>Systems over <em>psychology</em>.</h2>
+          <p>The pitch: stop asking "what's wrong with me?" and start asking "what system would actually produce what I want?" Psychology has its place — but the systems you run are usually where the leverage hides.</p>
+          <a href="https://mikelewis.me/2026/04/27/systems-over-psychology/" target="_blank" rel="noopener" class="read">Read the post <span class="arrow">↗</span></a>
+        </div>
+        <div class="placeholder" style="aspect-ratio: 4/3;">
+          <span>Post cover image</span>
+        </div>
+      </article>
+
+      <div class="posts" id="posts">
+
+        <a class="post" data-tag="execution" href="https://mikelewis.me/2026/04/16/agreements-are-crucial/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Apr 16, 2026</span>
+            <span class="tag">Execution</span>
+          </div>
+          <div class="body">
+            <h3>Agreements are <em>crucial</em>.</h3>
+            <p>A common cause of slow, frustrating startups is sloppy agreements — people not showing up on time, quotas missed without consequence, money spent that shouldn't be. The fix isn't more rules; it's tighter agreements.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="leadership" href="https://mikelewis.me/2026/03/31/coach-ks-practice-masterclass/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Mar 31, 2026</span>
+            <span class="tag">Leadership</span>
+          </div>
+          <div class="body">
+            <h3>Coach K's practice <em>masterclass</em>.</h3>
+            <p>A resurfaced Coach K practice plan that's really a clinic on organization, delegation, adaptability, and standards. The lessons translate cleanly to running a company.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="org" href="https://mikelewis.me/2026/03/06/make-your-people-your-product/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Mar 06, 2026</span>
+            <span class="tag">Org &amp; team</span>
+          </div>
+          <div class="body">
+            <h3>Make your <em>people</em> your product.</h3>
+            <p>Technical founders instrument their product to the millimeter and then manage their team on vibes. A short essay on closing that gap.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="strategy" href="https://mikelewis.me/2026/01/22/3-step-process-to-success/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Jan 22, 2026</span>
+            <span class="tag">Strategy</span>
+          </div>
+          <div class="body">
+            <h3>A <em>three-step</em> process.</h3>
+            <p>Most of the work I do with clients comes down to three steps: figure out what you actually want, decide on a strategy to get it, and then go do that. The trap is in step one.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="decisions" href="https://mikelewis.me/2025/07/07/monkey-and-the-pedastal/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Jul 07, 2025</span>
+            <span class="tag">Decisions</span>
+          </div>
+          <div class="body">
+            <h3>The <em>monkey</em> and the pedestal.</h3>
+            <p>An idea from Annie Duke and Google X: if your moonshot needs both a trained monkey and a pedestal, train the monkey first. Pedestals are easy. Knowing whether the whole bet is real is what matters.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="strategy" href="https://mikelewis.me/2024/09/12/travis-kalanick-seed-stage-investing-to-dos/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Sep 12, 2024</span>
+            <span class="tag">Strategy</span>
+          </div>
+          <div class="body">
+            <h3>Travis Kalanick's <em>fundraising</em> tips.</h3>
+            <p>Notes I kept from working with Travis pre-Uber — his rules for negotiating, raising, and getting seed-stage companies off the ground. A re-up of his old Swooshing.com posts.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="founder-psychology" href="https://mikelewis.me/2024/07/18/your-company-will-only-go-as-far-you-go/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Jul 18, 2024</span>
+            <span class="tag">Founder psychology</span>
+          </div>
+          <div class="body">
+            <h3>Your company goes <em>as far as you go</em>.</h3>
+            <p>The ceiling on a startup is usually the founder. Growing the business and growing yourself aren't separate projects.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="leadership" href="https://mikelewis.me/2024/06/17/willpower-isnt-enough/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Jun 17, 2024</span>
+            <span class="tag">Leadership</span>
+          </div>
+          <div class="body">
+            <h3>Willpower <em>isn't enough</em>.</h3>
+            <p>Real change doesn't come from grit or from a good explanation. It comes from an insight — a new thought that lands. A short video and a short post on what actually moves people.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+        <a class="post" data-tag="leadership" href="https://mikelewis.me/2024/06/01/leadership-vs-management/" target="_blank" rel="noopener">
+          <div class="date">
+            <span>Jun 01, 2024</span>
+            <span class="tag">Leadership</span>
+          </div>
+          <div class="body">
+            <h3>Leadership vs. <em>management</em>.</h3>
+            <p>Notes from Claire Hughes Johnson's book. Both are necessary; they're not the same thing. Three parts that stuck with me.</p>
+          </div>
+          <div class="read">Read<span class="arrow">↗</span></div>
+        </a>
+
+      </div>
+
+      <div class="reveal" style="margin-top: 32px; display:flex; justify-content:space-between; align-items:center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted);">
+        <span>More on mikelewis.me</span>
+        <a href="https://mikelewis.me/sample-page/" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px;">See all posts ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BLOG POSTS SUBSCRIBE -->
+  <section class="sub-essays" data-screen-label="Writing / Blog subscribe">
+    <div class="wrap">
+      <div class="sub-essays-grid">
+        <div>
+          <p class="eyebrow reveal" style="color:var(--muted-2); margin-bottom:18px;">Blog posts only</p>
+          <h2 class="reveal" style="margin-bottom:16px;">Get the <em>next</em> post.</h2>
+          <p class="reveal" style="font-size:18px; line-height:1.55; max-width:48ch;">
+            Want the longer pieces but not the weekly links? Subscribe here for
+            just the blog posts — usually one or two a month.
+          </p>
+        </div>
+        <form class="sub-essays-form reveal" id="essays-form">
+          <div class="field">
+            <label for="essays-email">Email</label>
+            <input type="email" id="essays-email" name="email" placeholder="you@company.com" required />
+            <span class="error-msg" hidden>Need a valid email.</span>
+          </div>
+          <button type="submit" class="btn">Subscribe <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Site v0.2 — placeholder copy</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  // Filter blog posts
+  const filters = document.getElementById("filters");
+  const posts = document.querySelectorAll("#posts .post");
+  const featured = document.querySelector(".featured");
+  const countEl = document.getElementById("count");
+
+  filters.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-tag]");
+    if (!btn) return;
+    filters.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const tag = btn.dataset.tag;
+    let visible = 0;
+    posts.forEach((p) => {
+      const show = tag === "all" || p.dataset.tag === tag;
+      p.classList.toggle("hidden", !show);
+      if (show) visible++;
+    });
+    const showFeat = (tag === "all" || featured.dataset.tag === tag);
+    featured.style.display = showFeat ? "" : "none";
+    if (tag === "all") {
+      countEl.textContent = (posts.length + 1) + " posts";
+    } else {
+      countEl.textContent = (visible + (showFeat ? 1 : 0)) + " in " + btn.textContent.toLowerCase();
+    }
+  });
+
+  // Blog posts form
+  const essaysForm = document.getElementById("essays-form");
+  essaysForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const field = essaysForm.querySelector(".field");
+    const email = essaysForm.querySelector("input").value.trim();
+    const err = field.querySelector(".error-msg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      field.classList.add("error");
+      err.hidden = false;
+      return;
+    }
+    essaysForm.innerHTML =
+      '<p style="font-family:var(--serif); font-size:22px; font-weight:300; letter-spacing:-0.01em; color:var(--paper);">' +
+      '✓ <em style="color:oklch(0.78 0.10 240); font-style:italic;">Subscribed.</em> First post coming.</p>';
+  });
+</script>
+</body>
+</html>
