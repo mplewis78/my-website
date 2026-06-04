@@ -195,6 +195,17 @@
       .quotes .q.lg, .quotes .q.md, .quotes .q.sm { grid-column: span 1; }
     }
 
+
+    /* Photo inside large quote card */
+    .quotes .q.lg .q-photo {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .quotes .q.lg .q-photo image-slot { width: 100%; height: 100%; display: block; }
+
     /* Case studies ------------------------------------------------ */
     .cases { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); }
     .case {
@@ -431,6 +442,9 @@
       <div class="quotes">
 
         <article class="q lg reveal">
+          <div class="q-photo">
+            <image-slot id="q-photo-lazarov" shape="rounded" radius="8px" src="images/Ben%20%26%20Anycreek%20with%20Mike.jpg" placeholder="Mike and Ben at a game"></image-slot>
+          </div>
           <span class="mark">"</span>
           <blockquote>Mike P Lewis is <em>by far and away</em> the person you want in your corner during this fight. Best executive coach I have worked with by a long shot, and is highly recommended to any serious founder looking to take it to the next level.</blockquote>
           <div class="who">
