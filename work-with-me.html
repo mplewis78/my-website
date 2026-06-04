@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work With Me — Mike Lewis</title>
+  <link rel="stylesheet" href="site.css" />
+  <script src="image-slot.js" defer></script>
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(56px, 7vw, 96px); }
+    .page-hero h1 { max-width: 16ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 56ch; }
+
+    .twocol {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 900px) { .twocol { grid-template-columns: 1fr; } }
+
+    .stack-card {
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 32px 28px;
+      background: var(--paper);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .stack-card h3 {
+      font-size: clamp(24px, 2.2vw, 32px);
+      letter-spacing: -0.015em;
+    }
+    .stack-card .role {
+      font-family: var(--mono); font-size: 11.5px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .stack-card ul { list-style: none; padding: 0; margin: 8px 0 0; display:flex; flex-direction:column; gap:12px; }
+    .stack-card ul li {
+      padding-left: 22px;
+      position: relative;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .stack-card ul li::before {
+      content: "→";
+      position: absolute; left: 0; top: 0;
+      color: var(--accent-ink);
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+    .stack-card.dark {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .stack-card.dark .role { color: var(--muted-2); }
+    .stack-card.dark h3 { color: var(--paper); }
+    .stack-card.dark ul li { color: color-mix(in oklab, var(--paper) 75%, transparent); }
+    .stack-card.dark ul li::before { color: oklch(0.78 0.13 60); }
+
+    .engagement {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    .engagement:first-of-type { border-top: 1px solid var(--rule); }
+    .engagement .label { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding-top: 6px; }
+    .engagement .title {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+    .engagement .title em { color: var(--accent-ink); font-style: italic; }
+    .engagement .desc { color: var(--muted); font-size: 15px; line-height: 1.55; }
+    @media (max-width: 800px) {
+      .engagement { grid-template-columns: 1fr; gap: 8px; }
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--rule-strong);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (max-width: 800px) { .compare { grid-template-columns: 1fr; } }
+    .compare > div { padding: 32px; }
+    .compare .is { background: var(--paper); border-right: 1px solid var(--rule); }
+    .compare .isnt { background: var(--paper-3); }
+    @media (max-width: 800px) {
+      .compare .is { border-right: none; border-bottom: 1px solid var(--rule); }
+    }
+    .compare h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+    .compare .is h3 em { color: var(--accent-ink); font-style: italic; }
+    .compare ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+    .compare ul li {
+      padding-left: 20px;
+      position: relative;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+    .compare .is ul li::before {
+      content: "+"; position:absolute; left:0; color: oklch(0.55 0.13 145); font-family: var(--mono); font-weight:500;
+    }
+    .compare .isnt ul li::before {
+      content: "−"; position:absolute; left:0; color: var(--muted); font-family: var(--mono); font-weight:500;
+    }
+
+    /* Hike intro */
+    .hike-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(40px, 5vw, 72px);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .hike-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .hike-photo {
+      aspect-ratio: 4 / 5;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .hike-photo image-slot { width: 100%; height: 100%; display: block; }
+    .hike-body { display: flex; flex-direction: column; gap: 24px; }
+    .hike-lede {
+      font-family: var(--serif);
+      font-size: clamp(24px, 2.6vw, 36px);
+      font-weight: 300;
+      line-height: 1.25;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin: 0;
+      max-width: 30ch;
+    }
+    .hike-lede em { color: var(--accent-ink); font-style: italic; }
+    .hike-body-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 56ch;
+      margin: 0;
+    }
+    .hike-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 8px;
+    }
+    .hike-fact {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hike-fact:nth-child(odd) { padding-right: 24px; border-right: 1px solid var(--rule); }
+    .hike-fact:nth-child(even) { padding-left: 24px; }
+    .hike-fact .k {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hike-fact .v {
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.6vw, 22px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+    .hike-note {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html" class="active">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Work With Me">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Work with Mike</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        A small number of leaders. <em>Real</em> relationships. Ongoing.
+      </h1>
+      <p class="lede reveal">
+        I work with a limited number of founders and companies at a time —
+        usually in an ongoing advisory and coaching relationship. Deep
+        enough to matter, narrow enough to actually show up.
+      </p>
+      <div class="hero-meta reveal" style="display:flex; gap:28px; margin-top:48px; padding-top:24px; border-top:1px solid var(--rule); font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); flex-wrap:wrap;">
+        <span>By application</span>
+        <span>3–12 month minimum</span>
+        <span>SF · Worldwide</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE START -->
+  <section style="background:var(--paper-2);" data-screen-label="Work With Me / Start with a hike">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">01 · How we start</span></div>
+        <h2>We start with a <em>hike</em>.</h2>
+      </div>
+
+      <div class="hike-grid">
+        <div class="hike-photo reveal">
+          <image-slot
+            id="hike-photo"
+            shape="rounded"
+            radius="6px"
+            placeholder="Trail shot — Mike + CEO mid-hike. Marin, LA hills, or wherever you walk.">
+          </image-slot>
+        </div>
+
+        <div class="hike-body reveal">
+          <p class="hike-lede">
+            Three hours on foot. No deck, no agenda, no laptop — just enough
+            time and distance to actually get to know each other and the
+            company you're trying to build.
+          </p>
+          <p class="hike-body-text">
+            I do this with every new CEO I take on. The conversation goes
+            deeper outside than it ever does on Zoom, and most of the trust
+            we'll need for the harder months gets built in the first mile.
+          </p>
+
+          <div class="hike-meta">
+            <div class="hike-fact">
+              <span class="k">Duration</span>
+              <span class="v">~3 hours on trail</span>
+            </div>
+            <div class="hike-fact">
+              <span class="k">Where</span>
+              <span class="v">Bay Area (Marin) or LA</span>
+            </div>
+            <div class="hike-fact">
+              <span class="k">Pace</span>
+              <span class="v">Steady, talkable</span>
+            </div>
+            <div class="hike-fact">
+              <span class="k">Cost</span>
+              <span class="v">Built into the engagement</span>
+            </div>
+          </div>
+
+          <p class="hike-note">
+            I live in Marin. If you're elsewhere, we'll find a trail that
+            works — or do the first hike when you next pass through.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT LOOKS LIKE -->
+  <section data-screen-label="Work With Me / Engagement">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">02 · Engagement</span></div>
+        <h2>What working <em>together</em> looks like.</h2>
+      </div>
+
+      <div class="reveal">
+        <div class="engagement">
+          <span class="label">Cadence</span>
+          <div class="title">Weekly, biweekly, or <em>custom</em>.</div>
+          <p class="desc">Most engagements settle into a weekly rhythm with a longer working session once a quarter. Cadence flexes around what the moment calls for.</p>
+        </div>
+        <div class="engagement">
+          <span class="label">Format</span>
+          <div class="title">Zoom · walk-and-talk · on-site when it matters.</div>
+          <p class="desc">Default is video. Some clients prefer phone calls on walks. I'll come on-site for offsites, board prep, and high-stakes weeks.</p>
+        </div>
+        <div class="engagement">
+          <span class="label">Between sessions</span>
+          <div class="title">Available over <em>Slack</em>.</div>
+          <p class="desc">I'm in your Slack between sessions. Quick reads on a hard message, a board memo, a decision that can't wait until next Tuesday.</p>
+        </div>
+        <div class="engagement">
+          <span class="label">Scope</span>
+          <div class="title">Know the <em>entire team</em>.</div>
+          <p class="desc">I meet with your team and board to get the context of the business, see the impact of your behavior, and uplevel their process and thinking. Plus — CEOs can be unreliable narrators. 🙂</p>
+        </div>
+        <div class="engagement">
+          <span class="label">Offsites</span>
+          <div class="title">Attend, plan, and <em>lead</em>.</div>
+          <p class="desc">I can attend, help plan, or run offsites so they actually move the company forward instead of becoming the kind of offsite people complain about for weeks after.</p>
+        </div>
+        <div class="engagement">
+          <span class="label">Commitment</span>
+          <div class="title">Three months <em>minimum</em>. Most go longer.</div>
+          <p class="desc">The work compounds. The first few sessions are reconnaissance. The real leverage shows up after.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- CTA -->
+  <section style="background:var(--ink); color:var(--paper);" data-screen-label="Work With Me / CTA">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="color:var(--muted-2); margin-bottom:24px;">Next</p>
+      <h2 class="reveal" style="color:var(--paper); max-width:20ch;">Think we might be a <em style="color:oklch(0.78 0.10 240);">fit</em>?</h2>
+      <p class="reveal" style="font-size:20px; line-height:1.5; max-width:54ch; margin:24px 0 32px; color:color-mix(in oklab, var(--paper) 70%, transparent);">
+        Send a short note. Tell me what you're building, what's hard right now,
+        and why now. I read every message.
+      </p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;" class="reveal">
+        <a href="contact.html" class="btn" style="background:var(--paper); color:var(--ink); border-color:var(--paper);">Apply for an engagement <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Site v0.1 — placeholder copy</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
