@@ -170,6 +170,7 @@
     }
     .quotes .q .who .face image-slot { width: 100%; height: 100%; display: block; }
     .quotes .q .who .who-text { display: flex; flex-direction: column; gap: 2px; }
+    .quotes .q .who a.name { text-decoration: none; }
     .quotes .q .who .name {
       font-family: var(--mono);
       font-size: 11.5px;
@@ -184,6 +185,22 @@
       text-transform: uppercase;
       color: var(--muted);
     }
+    .quotes .q .who .via {
+      margin-left: auto;
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 10px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: border-color .15s, color .15s;
+    }
+    .quotes .q .who .via:hover { border-color: #0A66C2; color: #0A66C2; }
     .quotes .q.lg { grid-column: span 4; }
     .quotes .q.md { grid-column: span 3; }
     .quotes .q.sm { grid-column: span 2; }
@@ -197,14 +214,14 @@
 
 
     /* Photo inside large quote card */
-    .quotes .q.lg .q-photo {
+    .quotes .q .q-photo {
       width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 4px;
     }
-    .quotes .q.lg .q-photo image-slot { width: 100%; height: 100%; display: block; }
+    .quotes .q .q-photo image-slot { width: 100%; height: 100%; display: block; }
 
     /* Case studies ------------------------------------------------ */
     .cases { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); }
@@ -448,14 +465,16 @@
           <span class="mark">"</span>
           <blockquote>Mike P Lewis is <em>by far and away</em> the person you want in your corner during this fight. Best executive coach I have worked with by a long shot, and is highly recommended to any serious founder looking to take it to the next level.</blockquote>
           <div class="who">
-            <div class="face">
-              <image-slot id="q-face-lazarov" shape="circle" placeholder="Benjamin Lazarov headshot"></image-slot>
-            </div>
             <div class="who-text">
-              <span class="name">Benjamin Lazarov</span>
+              <a class="name" href="https://www.linkedin.com/in/benjamin-lazarov-43495b26/" target="_blank" rel="noopener">Benjamin Lazarov</a>
               <span class="role">Founder &amp; CEO · AnyCreek + Origin</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
@@ -464,13 +483,18 @@
           <blockquote>Great perspective, super insights and <em>high energy</em>. I've worked with him directly — just did a hike yesterday :-)</blockquote>
           <div class="who">
             <div class="face">
-              <image-slot id="q-face-chen" shape="circle" placeholder="Steve Chen headshot"></image-slot>
+              <image-slot id="q-face-chen" src="images/Steve%20Chen%20headshot.jpeg" shape="circle" placeholder="Steve Chen headshot"></image-slot>
             </div>
             <div class="who-text">
-              <span class="name">Steve Chen</span>
+              <a class="name" href="https://www.linkedin.com/in/secventures/" target="_blank" rel="noopener">Steve Chen</a>
               <span class="role">Founder &amp; CEO · Boldin</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
@@ -485,22 +509,32 @@
               <span class="name">Kyle Pontier</span>
               <span class="role">Product &amp; Strategy Leader</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
         <article class="q md reveal">
+          <div class="q-photo">
+            <image-slot id="q-photo-joshi" shape="rounded" radius="8px" src="images/Avinash%20and%20Mike%20on%20Beach.jpeg" placeholder="Avinash and Mike"></image-slot>
+          </div>
           <span class="mark">"</span>
           <blockquote>Mike P Lewis has been awesome for Ajith and me. It feels like he's <em>part of our team</em>. TL;DR — work with Mike, it's your gift to yourself :)</blockquote>
           <div class="who">
-            <div class="face">
-              <image-slot id="q-face-joshi" shape="circle" placeholder="Avinash Joshi headshot"></image-slot>
-            </div>
             <div class="who-text">
-              <span class="name">Avinash Joshi</span>
+              <a class="name" href="https://www.linkedin.com/in/joshi-avinash/" target="_blank" rel="noopener">Avinash Joshi</a>
               <span class="role">Co-Founder &amp; CTO · Cactus</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
@@ -515,7 +549,12 @@
               <span class="name">Henry Abenaim</span>
               <span class="role">Founder &amp; CEO · FUNDINGO</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
@@ -530,22 +569,32 @@
               <span class="name">JP Gooderham</span>
               <span class="role">CEO · Storyboard</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
-        <article class="q sm reveal">
+        <article class="q md reveal">
+          <div class="q-photo">
+            <image-slot id="q-photo-ajith" shape="rounded" radius="8px" src="images/Ajith%20and%20Mike%20and%20Cactus.jpeg" placeholder="Ajith and Mike"></image-slot>
+          </div>
           <span class="mark">"</span>
           <blockquote>Mike P Lewis has been <em>amazing</em> for Avinash Joshi and me.</blockquote>
           <div class="who">
-            <div class="face">
-              <image-slot id="q-face-satheesh" shape="circle" placeholder="Ajith Govind Satheesh headshot"></image-slot>
-            </div>
             <div class="who-text">
-              <span class="name">Ajith Govind Satheesh</span>
+              <a class="name" href="https://www.linkedin.com/in/ajith-govind/" target="_blank" rel="noopener">Ajith Govind Satheesh</a>
               <span class="role">Co-Founder &amp; CEO · Cactus</span>
             </div>
-            <span class="via">LinkedIn</span>
+            <a class="via" href="https://www.linkedin.com/posts/carlottasiniscalco_one-of-the-biggest-risks-i-see-for-early-stage-activity-7396303755597664256-TDAv/?utm_medium=ios_app&rcm=ACoAAAAA3hIBwfbaUzYIuJUEXkyTd1oh4KN-s9Y&utm_source=social_share_send&utm_campaign=copy_link" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="flex-shrink:0">
+              <rect width="24" height="24" rx="3" fill="#0A66C2"/>
+              <path fill="#fff" d="M7.2 19H4.8V9.6h2.4V19zm-1.2-10.7a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM19.2 19h-2.4v-4.8c0-1.1-.4-1.9-1.4-1.9-1.1 0-1.6.8-1.6 1.9V19H11.4V9.6h2.4v1.1c.5-.8 1.5-1.4 2.7-1.4 1.9 0 2.7 1.3 2.7 3.5V19z"/>
+            </svg>
+              LinkedIn
+            </a>
           </div>
         </article>
 
