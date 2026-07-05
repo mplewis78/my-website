@@ -4,6 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — Mike Lewis</title>
+  <meta name="description" content="Tell Mike what you're working on." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mike Lewis" />
+  <meta property="og:title" content="Contact — Mike Lewis" />
+  <meta property="og:description" content="Tell Mike what you're working on." />
+  <meta property="og:image" content="https://mikelewis.me/images/Main%20Image%20of%20Mike.jpg" />
+  <meta property="og:url" content="https://mikelewis.me/contact.html" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="site.css" />
   <style>
     .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(48px, 6vw, 80px); }
@@ -257,7 +266,7 @@
             </div>
 
             <div class="submit-row">
-              <span class="promise">I'll reply within 3 business days.</span>
+              <span class="promise">I read every note myself.</span>
               <button type="submit" class="btn">Send the note <span class="arrow">→</span></button>
             </div>
           </form>
@@ -265,7 +274,7 @@
           <div class="success" id="success">
             <span class="check">✓</span>
             <h3>Note <em>received</em>.</h3>
-            <p>I read these myself. If it looks like a fit, I'll write back within three business days to set up a short conversation.</p>
+            <p>I read these myself. If it looks like a fit, I'll write back to set up a short conversation.</p>
             <div class="summary" id="success-summary"></div>
             <button type="button" class="btn ghost" id="send-another" style="margin-top:12px;">Send another</button>
           </div>
@@ -275,18 +284,11 @@
         <aside class="meta-stack reveal">
           <div class="meta-card">
             <p class="label">Direct email</p>
-            <p class="value"><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></p>
+            <p class="value"><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></p>
           </div>
           <div class="meta-card">
             <p class="label">Calendar</p>
             <p class="value">After a short note, we'll find a <em>30-minute</em> intro call.</p>
-          </div>
-          <div class="meta-card">
-            <p class="label">Currently</p>
-            <p class="value">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:oklch(0.62 0.14 145); margin-right:6px; vertical-align:middle;"></span>
-              Taking <em>2 new</em> engagements for 2026.
-            </p>
           </div>
           <div class="meta-card">
             <p class="label">Where I am</p>
@@ -295,8 +297,7 @@
           <div class="meta-card">
             <p class="label">Elsewhere</p>
             <p class="value">
-              <a href="#" style="margin-right:14px;">LinkedIn</a>
-              <a href="#">X / Twitter</a>
+              <a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a>
             </p>
           </div>
         </aside>
@@ -334,13 +335,13 @@
       <h4>Elsewhere</h4>
       <ul>
         <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="mailto:hello@mikelewis.co">hello@mikelewis.co</a></li>
+        <li><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-meta">
     <span>© 2026 Mike Lewis</span>
-    <span>Site v0.1 — placeholder copy</span>
+    <span>Made in Marin, California</span>
   </div>
 </footer>
 
@@ -390,7 +391,11 @@
     });
   });
 
-  form.addEventListener("submit", (e) => {
+  // Formspree endpoint — create a free form at https://formspree.io (send to
+  // mike@mikelewis.me), then replace YOUR_FORM_ID below with the form's ID.
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     let ok = true;
     form.querySelectorAll("input[required], textarea[required], input[type=email]").forEach((el) => {
@@ -398,6 +403,30 @@
     });
     if (!ok) {
       form.querySelector(".error input, .error textarea")?.focus();
+      return;
+    }
+
+    const submitBtn = form.querySelector("button[type=submit]");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+
+    let sent = false;
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      sent = res.ok;
+    } catch (err) {
+      sent = false;
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send the note <span class="arrow">→</span>';
+
+    if (!sent) {
+      alert("Sorry — the form didn't go through. Please email me directly at mike@mikelewis.me.");
       return;
     }
 
