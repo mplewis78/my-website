@@ -25,7 +25,8 @@ MNL_FEED = 'https://startupthoughts.substack.com/feed'
 ADVISOR_FEED = 'https://advisormike.substack.com/feed'
 
 MNL_N = 4          # how many Mike & Ned issues to show
-ADVISOR_N = 10      # max advisor posts to pull (shows all recent)
+FEATURED_SLUG = 'systems-over-psychology'  # rendered as the featured card; skip in list
+ADVISOR_N = 20      # max advisor posts to pull (shows all recent)
 DESC_MAX = 220      # characters for preview text
 
 
@@ -66,10 +67,30 @@ def parse_items(xml_text: str, n: int = None) -> list[dict]:
             date_fmt = dt.strftime('%b %-d, %Y')
         except Exception:
             date_fmt = ''
-        items.append({'title': title, 'link': link, 'desc': desc, 'date': date_fmt})
+        content = item.findtext('{http://purl.org/rss/1.0/modules/content/}encoded') or ''
+        items.append({'title': title, 'link': link, 'desc': desc, 'date': date_fmt,
+                      'preview': extract_link_titles(content)})
         if n and len(items) >= n:
             break
     return items
+
+
+LINK_SKIP = re.compile(
+    r'^(subscribe|share|read more|view in browser|leave a comment|comment|'
+    r'enjoy the work|open in app|listen now|get the app)|placeholder', re.I)
+
+def extract_link_titles(content_html: str, n: int = 4) -> str:
+    """First few anchor texts from a post body — used as the MNL issue preview."""
+    titles, seen = [], set()
+    for m in re.finditer(r'<a[^>]*>(.*?)</a>', content_html, re.S):
+        t = clean_html(m.group(1), maxlen=90)
+        if len(t) < 10 or LINK_SKIP.search(t) or t.lower() in seen:
+            continue
+        seen.add(t.lower())
+        titles.append(t.rstrip('.'))
+        if len(titles) >= n:
+            break
+    return ', '.join(titles)
 
 
 def replace_zone(html: str, start_marker: str, end_marker: str, new_content: str) -> str:
@@ -109,7 +130,7 @@ def make_mnl_items(items: list[dict]) -> str:
         num = m.group(1) if m else '?'
         e_link = html_mod.escape(item['link'])
         e_date = html_mod.escape(item['date'])
-        e_desc = html_mod.escape(item['desc'])
+        e_desc = html_mod.escape(item['preview'] or item['desc'])
         parts.append(
             f'            <a class="mnl-item" href="{e_link}" target="_blank" rel="noopener">\n'
             f'              <span class="nday">Issue<span class="num">{num}</span></span>\n'
@@ -148,6 +169,8 @@ def tag_for(title: str, desc: str) -> tuple[str, str]:
 def make_advisor_posts(items: list[dict]) -> str:
     parts = []
     for item in items:
+        if FEATURED_SLUG in item['link']:
+            continue
         tag_slug, tag_label = tag_for(item['title'], item['desc'])
         e_link  = html_mod.escape(item['link'])
         e_date  = html_mod.escape(item['date'])
