@@ -133,6 +133,13 @@
     @media (max-width: 900px) { .hike-grid { grid-template-columns: 1fr; gap: 32px; } }
     .hike-photo {
       aspect-ratio: 4 / 5;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hike-photo .pane {
+      flex: 1;
+      min-height: 0;
       border-radius: 6px;
       overflow: hidden;
     }
@@ -255,12 +262,24 @@
 
       <div class="hike-grid">
         <div class="hike-photo reveal">
-          <image-slot
-            id="hike-photo"
-            shape="rounded"
-            radius="6px"
-            placeholder="Trail shot — Mike + CEO mid-hike. Marin, LA hills, or wherever you walk.">
-          </image-slot>
+          <div class="pane">
+            <image-slot
+              id="hike-photo-1"
+              src="images/Max%20%26%20MIke%20Hike.jpeg"
+              shape="rounded"
+              radius="6px"
+              placeholder="Trail shot — Mike + founder mid-hike.">
+            </image-slot>
+          </div>
+          <div class="pane">
+            <image-slot
+              id="hike-photo-2"
+              src="images/Avinash%20%26%20Mike%20Hike%202.jpeg"
+              shape="rounded"
+              radius="6px"
+              placeholder="Trail shot — Mike + founder mid-hike.">
+            </image-slot>
+          </div>
         </div>
 
         <div class="hike-body reveal">
