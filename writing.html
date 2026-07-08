@@ -200,124 +200,17 @@
       padding-bottom: 3px;
     }
 
-    /* ============== Essays ============== */
-    .filters {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin: 24px 0 0;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .filters button {
+    /* ============== Blog posts ============== */
+    .essays .mnl-item { grid-template-columns: 110px 1fr 40px; }
+    .essays .ndate {
       font-family: var(--mono);
       font-size: 11.5px;
       letter-spacing: 0.10em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 10px 14px;
-      border: 1px solid var(--rule-strong);
-      border-radius: 999px;
-      cursor: pointer;
-      background: transparent;
-      transition: background .15s ease, color .15s ease, border-color .15s ease;
+      line-height: 1.6;
     }
-    .filters button:hover { color: var(--ink); border-color: var(--ink); }
-    .filters button.active {
-      background: var(--ink); color: var(--paper); border-color: var(--ink);
-    }
-    .filters .count {
-      margin-left: auto;
-      font-family: var(--mono);
-      font-size: 11.5px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--muted);
-      align-self: center;
-    }
-
-    .featured {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 48px;
-      align-items: end;
-      padding-top: 40px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid var(--rule);
-    }
-    @media (max-width: 900px) { .featured { grid-template-columns: 1fr; gap: 24px; } }
-    .featured .meta {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-      display: flex; gap: 14px; align-items: center;
-    }
-    .featured .meta .tag { color: var(--accent-ink); }
-    .featured h2 {
-      font-size: clamp(40px, 5vw, 64px);
-      letter-spacing: -0.018em;
-      line-height: 1.02;
-      margin-bottom: 18px;
-      font-weight: 400;
-    }
-    .featured h2 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
-    .featured p { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 50ch; }
-    .featured .read {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-top: 18px;
-      font-family: var(--mono);
-      font-size: 12.5px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 4px;
-    }
-
-    .posts { display: grid; grid-template-columns: 1fr; }
-    .post {
-      display: grid;
-      grid-template-columns: 140px 1fr 200px;
-      gap: 40px;
-      padding: 36px 0;
-      border-bottom: 1px solid var(--rule);
-      align-items: baseline;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
-    .post:hover { background: var(--paper-2); }
-    .post .date {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .post .date .tag { color: var(--accent-ink); margin-top: 6px; display: block; }
-    .post .body h3 {
-      font-size: clamp(24px, 2.3vw, 32px);
-      letter-spacing: -0.015em;
-      font-weight: 400;
-      line-height: 1.12;
-      margin-bottom: 10px;
-    }
-    .post .body h3 em { color: var(--accent-ink); font-style: italic; font-weight: 300; }
-    .post .body p { color: var(--ink-2); margin: 0; max-width: 60ch; line-height: 1.55; }
-    .post .read {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: right;
-    }
-    .post .read .arrow { display: block; margin-top: 6px; font-size: 18px; color: var(--ink); transition: transform .2s ease; }
-    .post:hover .read .arrow { transform: translateX(4px); color: var(--accent-ink); }
-    @media (max-width: 900px) {
-      .post { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
-      .post .read { display: none; }
-    }
-    .post.hidden { display: none; }
+    .essays .ndate .tag { display: block; color: var(--accent-ink); margin-top: 6px; }
 
     /* Subscribe essays */
     .sub-essays {
@@ -396,196 +289,169 @@
   </section>
 
   <!-- BLOG POSTS -->
-  <section data-screen-label="Writing / Blog posts">
+  <section class="essays" data-screen-label="Writing / Blog posts">
     <div class="wrap">
 
-      <div class="section-head reveal">
-        <div class="label"><span class="eyebrow">Blog posts</span></div>
-        <div>
+      <div class="mnl-grid">
+
+        <div class="mnl-mast reveal">
+          <p class="badge"><span class="dot"></span> Blog · Substack</p>
           <h2>Longer <em>notes</em>.</h2>
-          <p class="muted" style="max-width:54ch; margin-top:20px;">
+          <p>
             Frameworks and observations from inside founder conversations.
-            Published when there's something worth saying. Read on
-            advisormike.substack.com.
+            Published when there's something worth saying.
           </p>
+          <div class="stats">
+            <div class="stat">
+              <span class="num" id="essay-count">13</span>
+              <span class="label">Recent posts</span>
+            </div>
+            <div class="stat">
+              <span class="num"><em>Occasional</em></span>
+              <span class="label">Cadence</span>
+            </div>
+            <div class="stat">
+              <span class="num">Free</span>
+              <span class="label">No paywall</span>
+            </div>
+          </div>
+
+          <a href="https://advisormike.substack.com/" target="_blank" rel="noopener" class="btn" style="align-self:flex-start;">
+            Read on Substack <span class="arrow">↗</span>
+          </a>
+          <p class="helper" style="margin-top:14px; font-family: var(--mono); font-size: 11px; letter-spacing:0.10em; text-transform:uppercase; color:var(--muted);">advisormike.substack.com</p>
         </div>
-      </div>
 
-      <div class="filters reveal" id="filters">
-        <button class="active" data-tag="all">All</button>
-        <button data-tag="strategy">Strategy</button>
-        <button data-tag="leadership">Leadership</button>
-        <button data-tag="founder-psychology">Founder psychology</button>
-        <button data-tag="decisions">Decisions</button>
-        <button data-tag="org">Org &amp; team</button>
-        <button data-tag="execution">Execution</button>
-        <span class="count" id="count">13 posts</span>
-      </div>
+        <div class="reveal">
+          <div class="mnl-list">
 
-      <article class="featured reveal" data-tag="founder-psychology">
-        <div>
-          <p class="meta">
-            <span>Apr 23, 2026</span>
-            <span>·</span>
-            <span class="tag">Featured</span>
-          </p>
-          <h2>Systems over <em>psychology</em>.</h2>
-          <p>The pitch: stop asking "what's wrong with me?" and start asking "what system would actually produce what I want?" Psychology has its place — but the systems you run are usually where the leverage hides.</p>
-          <a href="https://advisormike.substack.com/p/systems-over-psychology" target="_blank" rel="noopener" class="read">Read the post <span class="arrow">↗</span></a>
+            <!-- ADVISORMIKE-AUTO-START -->
+            <a class="mnl-item" href="https://advisormike.substack.com/p/the-product-is-more-than-the-software" target="_blank" rel="noopener">
+              <span class="ndate">Jul 5, 2026<span class="tag">Founder Psychology</span></span>
+              <div>
+                <h3>The Product is More than the Software and UX</h3>
+                <p class="preview">Founder often focus on the product they’re building and too often forget about the rest of the customer journey until they’re ready to deliver it to the customer.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/to-succeed-in-ai-you-need-the-right" target="_blank" rel="noopener">
+              <span class="ndate">Jun 17, 2026<span class="tag">Org</span></span>
+              <div>
+                <h3>To Succeed in AI, You Need the Right Mindset</h3>
+                <p class="preview">The companies that figure out AI first will be the ones with the most curious teams.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/what-founders-can-learn-from-the" target="_blank" rel="noopener">
+              <span class="ndate">Jun 15, 2026<span class="tag">Founder Psychology</span></span>
+              <div>
+                <h3>What Founders Can Learn from the SpaceX IPO</h3>
+                <p class="preview">Everyone is talking about the SpaceX IPO this week.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/dont-have-a-network-stop-cold-emailing" target="_blank" rel="noopener">
+              <span class="ndate">May 28, 2026<span class="tag">Strategy</span></span>
+              <div>
+                <h3>Don&#x27;t Have a Network? Stop Cold Emailing VCs. Start Playing the Game.</h3>
+                <p class="preview">You don’t get discovered by asking — you get discovered by playing</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/fundraising-half-story-half-reality" target="_blank" rel="noopener">
+              <span class="ndate">May 18, 2026<span class="tag">Strategy</span></span>
+              <div>
+                <h3>Fundraising: Half Story / Half Reality</h3>
+                <p class="preview">i recently attended a VC Founder Retreat where i was talking with one of the Partners who had a great framework on how to evaluate pitches.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/systems-over-psychology" target="_blank" rel="noopener">
+              <span class="ndate">Apr 23, 2026<span class="tag">Founder Psychology</span></span>
+              <div>
+                <h3>Systems over Psychology</h3>
+                <p class="preview">Stop asking “what’s wrong with me?” and start asking “what system would actually produce what I want?” The systems you run are usually where the leverage hides.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/coach-ks-masterclass" target="_blank" rel="noopener">
+              <span class="ndate">Mar 31, 2026<span class="tag">Leadership</span></span>
+              <div>
+                <h3>Coach K&#x27;s Masterclass</h3>
+                <p class="preview">Examining how Coach K runs his practice shows us a lot about leadership and the many things that go into it</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/make-your-people-your-product" target="_blank" rel="noopener">
+              <span class="ndate">Feb 10, 2026<span class="tag">Org</span></span>
+              <div>
+                <h3>Make Your People Your Product</h3>
+                <p class="preview">Many technical and product-driven founders (especially engineers) have a weird blind spot. While they can build and instrument the hell out of their product, they strangely tend to manage their people</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/3-step-process-to-success" target="_blank" rel="noopener">
+              <span class="ndate">Jan 23, 2026<span class="tag">Strategy</span></span>
+              <div>
+                <h3>3-Step Process to Success</h3>
+                <p class="preview">For many conversations, I’ve noticed a pattern.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/the-monkey-and-the-pedestal" target="_blank" rel="noopener">
+              <span class="ndate">Jul 8, 2025<span class="tag">Strategy</span></span>
+              <div>
+                <h3>The Monkey and the Pedestal</h3>
+                <p class="preview">(I came across this piece of wisdom in Annie Duke’s book Quit).</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/travis-kalanicks-fundraising-tips" target="_blank" rel="noopener">
+              <span class="ndate">Sep 13, 2024<span class="tag">Strategy</span></span>
+              <div>
+                <h3>Travis Kalanick’s Fundraising Tips</h3>
+                <p class="preview">Back in 2005-2013, I got to know Uber founder Travis Kalanick.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/your-company-will-only-go-as-far" target="_blank" rel="noopener">
+              <span class="ndate">Jul 19, 2024<span class="tag">Founder Psychology</span></span>
+              <div>
+                <h3>Your Company Will Only Go as Far as You Go</h3>
+                <p class="preview">Hey founders…</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+
+            <a class="mnl-item" href="https://advisormike.substack.com/p/leadership-vs-management" target="_blank" rel="noopener">
+              <span class="ndate">Jun 2, 2024<span class="tag">Leadership</span></span>
+              <div>
+                <h3>Leadership vs. Management</h3>
+                <p class="preview">I recently read Claire Hughes Johnson’s book and loved it.</p>
+              </div>
+              <span class="arrow">↗</span>
+            </a>
+            <!-- ADVISORMIKE-AUTO-END -->
+
+            <div class="more">
+              <span>All posts free to read</span>
+              <a href="https://advisormike.substack.com/" target="_blank" rel="noopener">Browse on Substack ↗</a>
+            </div>
+
+          </div>
         </div>
-      </article>
 
-      <div class="posts" id="posts">
-
-        <!-- ADVISORMIKE-AUTO-START -->
-        <a class="post" data-tag="founder-psychology" href="https://advisormike.substack.com/p/the-product-is-more-than-the-software" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jul 5, 2026</span>
-            <span class="tag">Founder Psychology</span>
-          </div>
-          <div class="body">
-            <h3>The Product is More than the Software and UX</h3>
-            <p>Founder often focus on the product they’re building and too often forget about the rest of the customer journey until they’re ready to deliver it to the customer.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="org" href="https://advisormike.substack.com/p/to-succeed-in-ai-you-need-the-right" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jun 17, 2026</span>
-            <span class="tag">Org</span>
-          </div>
-          <div class="body">
-            <h3>To Succeed in AI, You Need the Right Mindset</h3>
-            <p>The companies that figure out AI first will be the ones with the most curious teams.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="founder-psychology" href="https://advisormike.substack.com/p/what-founders-can-learn-from-the" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jun 15, 2026</span>
-            <span class="tag">Founder Psychology</span>
-          </div>
-          <div class="body">
-            <h3>What Founders Can Learn from the SpaceX IPO</h3>
-            <p>Everyone is talking about the SpaceX IPO this week.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="strategy" href="https://advisormike.substack.com/p/dont-have-a-network-stop-cold-emailing" target="_blank" rel="noopener">
-          <div class="date">
-            <span>May 28, 2026</span>
-            <span class="tag">Strategy</span>
-          </div>
-          <div class="body">
-            <h3>Don&#x27;t Have a Network? Stop Cold Emailing VCs. Start Playing the Game.</h3>
-            <p>You don’t get discovered by asking — you get discovered by playing</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="strategy" href="https://advisormike.substack.com/p/fundraising-half-story-half-reality" target="_blank" rel="noopener">
-          <div class="date">
-            <span>May 18, 2026</span>
-            <span class="tag">Strategy</span>
-          </div>
-          <div class="body">
-            <h3>Fundraising: Half Story / Half Reality</h3>
-            <p>i recently attended a VC Founder Retreat where i was talking with one of the Partners who had a great framework on how to evaluate pitches.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="leadership" href="https://advisormike.substack.com/p/coach-ks-masterclass" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Mar 31, 2026</span>
-            <span class="tag">Leadership</span>
-          </div>
-          <div class="body">
-            <h3>Coach K&#x27;s Masterclass</h3>
-            <p>Examining how Coach K runs his practice shows us a lot about leadership and the many things that go into it</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="org" href="https://advisormike.substack.com/p/make-your-people-your-product" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Feb 10, 2026</span>
-            <span class="tag">Org</span>
-          </div>
-          <div class="body">
-            <h3>Make Your People Your Product</h3>
-            <p>Many technical and product-driven founders (especially engineers) have a weird blind spot. While they can build and instrument the hell out of their product, they strangely tend to manage their people</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="strategy" href="https://advisormike.substack.com/p/3-step-process-to-success" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jan 23, 2026</span>
-            <span class="tag">Strategy</span>
-          </div>
-          <div class="body">
-            <h3>3-Step Process to Success</h3>
-            <p>For many conversations, I’ve noticed a pattern.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="strategy" href="https://advisormike.substack.com/p/the-monkey-and-the-pedestal" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jul 8, 2025</span>
-            <span class="tag">Strategy</span>
-          </div>
-          <div class="body">
-            <h3>The Monkey and the Pedestal</h3>
-            <p>(I came across this piece of wisdom in Annie Duke’s book Quit).</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="strategy" href="https://advisormike.substack.com/p/travis-kalanicks-fundraising-tips" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Sep 13, 2024</span>
-            <span class="tag">Strategy</span>
-          </div>
-          <div class="body">
-            <h3>Travis Kalanick’s Fundraising Tips</h3>
-            <p>Back in 2005-2013, I got to know Uber founder Travis Kalanick.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="founder-psychology" href="https://advisormike.substack.com/p/your-company-will-only-go-as-far" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jul 19, 2024</span>
-            <span class="tag">Founder Psychology</span>
-          </div>
-          <div class="body">
-            <h3>Your Company Will Only Go as Far as You Go</h3>
-            <p>Hey founders…</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-
-        <a class="post" data-tag="leadership" href="https://advisormike.substack.com/p/leadership-vs-management" target="_blank" rel="noopener">
-          <div class="date">
-            <span>Jun 2, 2024</span>
-            <span class="tag">Leadership</span>
-          </div>
-          <div class="body">
-            <h3>Leadership vs. Management</h3>
-            <p>I recently read Claire Hughes Johnson’s book and loved it.</p>
-          </div>
-          <div class="read">Read<span class="arrow">↗</span></div>
-        </a>
-        <!-- ADVISORMIKE-AUTO-END -->
-      </div>
-
-      <div class="reveal" style="margin-top: 32px; display:flex; justify-content:space-between; align-items:center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted);">
-        <a href="https://advisormike.substack.com/" target="_blank" rel="noopener" style="color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px;">See all posts on Substack ↗</a>
       </div>
 
     </div>
@@ -747,34 +613,5 @@
 </footer>
 
 <script src="site.js"></script>
-<script>
-  // Filter blog posts
-  const filters = document.getElementById("filters");
-  const posts = document.querySelectorAll("#posts .post");
-  const featured = document.querySelector(".featured");
-  const countEl = document.getElementById("count");
-
-  filters.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-tag]");
-    if (!btn) return;
-    filters.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    const tag = btn.dataset.tag;
-    let visible = 0;
-    posts.forEach((p) => {
-      const show = tag === "all" || p.dataset.tag === tag;
-      p.classList.toggle("hidden", !show);
-      if (show) visible++;
-    });
-    const showFeat = (tag === "all" || featured.dataset.tag === tag);
-    featured.style.display = showFeat ? "" : "none";
-    if (tag === "all") {
-      countEl.textContent = (posts.length + 1) + " posts";
-    } else {
-      countEl.textContent = (visible + (showFeat ? 1 : 0)) + " in " + btn.textContent.toLowerCase();
-    }
-  });
-
-</script>
 </body>
 </html>

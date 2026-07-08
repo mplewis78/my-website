@@ -25,7 +25,6 @@ MNL_FEED = 'https://startupthoughts.substack.com/feed'
 ADVISOR_FEED = 'https://advisormike.substack.com/feed'
 
 MNL_N = 4          # how many Mike & Ned issues to show
-FEATURED_SLUG = 'systems-over-psychology'  # rendered as the featured card; skip in list
 ADVISOR_N = 20      # max advisor posts to pull (shows all recent)
 DESC_MAX = 220      # characters for preview text
 
@@ -106,18 +105,6 @@ def replace_zone(html: str, start_marker: str, end_marker: str, new_content: str
     return result
 
 
-def replace_zone_posts(html: str, start_marker: str, end_marker: str, new_content: str) -> str:
-    """Like replace_zone but with 8-space indent for the closing marker (posts section)."""
-    pattern = re.compile(
-        re.escape(start_marker) + r'.*?' + re.escape(end_marker),
-        re.DOTALL
-    )
-    replacement = f'{start_marker}\n{new_content}\n        {end_marker}'
-    result, n = pattern.subn(replacement, html)
-    if n == 0:
-        raise ValueError(f'Marker not found: {start_marker!r}')
-    return result
-
 
 # ---------------------------------------------------------------------------
 # HTML generators
@@ -169,26 +156,21 @@ def tag_for(title: str, desc: str) -> tuple[str, str]:
 def make_advisor_posts(items: list[dict]) -> str:
     parts = []
     for item in items:
-        if FEATURED_SLUG in item['link']:
-            continue
-        tag_slug, tag_label = tag_for(item['title'], item['desc'])
+        _, tag_label = tag_for(item['title'], item['desc'])
         e_link  = html_mod.escape(item['link'])
         e_date  = html_mod.escape(item['date'])
         e_title = html_mod.escape(item['title'])
         e_desc  = html_mod.escape(item['desc'])
         e_tag   = html_mod.escape(tag_label)
         parts.append(
-            f'        <a class="post" data-tag="{tag_slug}" href="{e_link}" target="_blank" rel="noopener">\n'
-            f'          <div class="date">\n'
-            f'            <span>{e_date}</span>\n'
-            f'            <span class="tag">{e_tag}</span>\n'
-            f'          </div>\n'
-            f'          <div class="body">\n'
-            f'            <h3>{e_title}</h3>\n'
-            f'            <p>{e_desc}</p>\n'
-            f'          </div>\n'
-            f'          <div class="read">Read<span class="arrow">↗</span></div>\n'
-            f'        </a>'
+            f'            <a class="mnl-item" href="{e_link}" target="_blank" rel="noopener">\n'
+            f'              <span class="ndate">{e_date}<span class="tag">{e_tag}</span></span>\n'
+            f'              <div>\n'
+            f'                <h3>{e_title}</h3>\n'
+            f'                <p class="preview">{e_desc}</p>\n'
+            f'              </div>\n'
+            f'              <span class="arrow">↗</span>\n'
+            f'            </a>'
         )
     return '\n\n'.join(parts)
 
@@ -240,11 +222,16 @@ def main():
         if not advisor_items:
             print('  No advisor items found, skipping.')
         else:
-            html = replace_zone_posts(
+            html = replace_zone(
                 html,
                 '<!-- ADVISORMIKE-AUTO-START -->',
                 '<!-- ADVISORMIKE-AUTO-END -->',
                 make_advisor_posts(advisor_items)
+            )
+            html = re.sub(
+                r'(<span class="num" id="essay-count">)\d+(</span>)',
+                rf'\g<1>{len(advisor_items)}\2',
+                html
             )
             print(f'  Updated {len(advisor_items)} advisor posts (latest: {advisor_items[0]["title"]})')
             changed = True
