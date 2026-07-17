@@ -240,7 +240,7 @@
       aspect-ratio: 16 / 7;
       border: 1px solid var(--rule);
       border-radius: 10px;
-      background: var(--paper);
+      background: #fff;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -249,6 +249,7 @@
     .logo-slot image-slot {
       width: 100%; height: 100%; display: block;
       position: absolute; inset: 0;
+      z-index: 1;
     }
     .logo-slot .logo-fallback {
       font-family: var(--serif);
@@ -491,7 +492,7 @@
             id="logo-airbnb"
             src="images/Logos/Airbnb%20logo.png"
             shape="rect"
-            fit="contain"
+            fit="cover"
             placeholder="Airbnb logo (SVG)">
           </image-slot>
           <span class="logo-fallback">Airbnb</span>
@@ -499,7 +500,7 @@
         <div class="logo-slot">
           <image-slot
             id="logo-kapost"
-            src="images/Logos/Kapost%20logo.jpg"
+            src="images/Logos/kapost-clean.png"
             shape="rect"
             fit="contain"
             placeholder="Kapost logo (SVG)">
@@ -509,7 +510,7 @@
         <div class="logo-slot">
           <image-slot
             id="logo-qloud"
-            src="images/Logos/qloud-logo.jpg"
+            src="images/Logos/qloud-clean.png"
             shape="rect"
             fit="contain"
             placeholder="Qloud logo (SVG)">
@@ -519,7 +520,7 @@
         <div class="logo-slot">
           <image-slot
             id="logo-onward"
-            src="images/Logos/onward-image.png"
+            src="images/Logos/onward-clean.png"
             shape="rect"
             fit="contain"
             placeholder="Onward logo (SVG)">
