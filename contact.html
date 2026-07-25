@@ -269,6 +269,7 @@
               <span class="promise">I read every note myself.</span>
               <button type="submit" class="btn">Send the note <span class="arrow">→</span></button>
             </div>
+            <p class="form-error" id="form-error" role="alert" hidden style="margin-top:16px; color:#b3261e; font-size:14px; line-height:1.5; font-weight:500;"></p>
           </form>
 
           <div class="success" id="success">
@@ -284,7 +285,7 @@
         <aside class="meta-stack reveal">
           <div class="meta-card">
             <p class="label">Direct email</p>
-            <p class="value"><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></p>
+            <p class="value"><a href="#" class="js-email" data-user="mike" data-domain="mikelewis.me" rel="nofollow">mike <span aria-hidden="true">at</span> mikelewis <span aria-hidden="true">dot</span> me</a></p>
           </div>
           <div class="meta-card">
             <p class="label">Calendar</p>
@@ -298,6 +299,8 @@
             <p class="label">Elsewhere</p>
             <p class="value">
               <a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a>
+              &nbsp;·&nbsp;
+              <a href="https://x.com/mikeplewis" target="_blank" rel="noopener">X / Twitter</a>
             </p>
           </div>
         </aside>
@@ -335,7 +338,8 @@
       <h4>Elsewhere</h4>
       <ul>
         <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></li>
+        <li><a href="https://x.com/mikeplewis" target="_blank" rel="noopener">X / Twitter</a></li>
+        <li><a href="#" class="js-email" data-user="mike" data-domain="mikelewis.me" rel="nofollow">mike <span aria-hidden="true">at</span> mikelewis <span aria-hidden="true">dot</span> me</a></li>
       </ul>
     </div>
   </div>
@@ -363,6 +367,7 @@
   const form = document.getElementById("contact-form");
   const successEl = document.getElementById("success");
   const summaryEl = document.getElementById("success-summary");
+  const formError = document.getElementById("form-error");
 
   const validateField = (input) => {
     const field = input.closest(".field");
@@ -379,6 +384,9 @@
     } else if (input.hasAttribute("required") && !input.value.trim()) {
       field.classList.add("error"); errEl.hidden = false; return false;
     } else if (input.tagName === "TEXTAREA" && input.value.trim().length < 12) {
+      errEl.textContent = input.value.trim().length === 0
+        ? "Please add a few sentences so I know what's going on."
+        : "A little more detail, please — just a sentence or two more.";
       field.classList.add("error"); errEl.hidden = false; return false;
     }
     return true;
@@ -388,6 +396,7 @@
     el.addEventListener("blur", () => validateField(el));
     el.addEventListener("input", () => {
       if (el.closest(".field").classList.contains("error")) validateField(el);
+      if (!form.querySelector(".field.error")) formError.hidden = true;
     });
   });
 
@@ -395,12 +404,19 @@
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    formError.hidden = true;
     let ok = true;
     form.querySelectorAll("input[required], textarea[required], input[type=email]").forEach((el) => {
       if (!validateField(el)) ok = false;
     });
     if (!ok) {
-      form.querySelector(".error input, .error textarea")?.focus();
+      const firstError = form.querySelector(".error input, .error textarea");
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => firstError.focus({ preventScroll: true }), 300);
+      }
+      formError.textContent = "Please fix the highlighted fields above, then send again.";
+      formError.hidden = false;
       return;
     }
 
@@ -424,7 +440,9 @@
     submitBtn.innerHTML = 'Send the note <span class="arrow">→</span>';
 
     if (!sent) {
-      alert("Sorry — the form didn't go through. Please email me directly at mike@mikelewis.me.");
+      formError.textContent = "Sorry — that didn't go through. Please email me directly at mike@mikelewis.me.";
+      formError.hidden = false;
+      formError.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
@@ -446,6 +464,11 @@
     form.style.display = "none";
     successEl.classList.add("show");
     successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  // Assemble email links at runtime so the raw HTML has no scrapeable address
+  document.querySelectorAll(".js-email").forEach((a) => {
+    a.setAttribute("href", "mailto:" + a.dataset.user + "@" + a.dataset.domain);
   });
 
   document.getElementById("send-another").addEventListener("click", () => {
