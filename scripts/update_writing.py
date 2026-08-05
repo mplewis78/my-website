@@ -25,7 +25,7 @@ MNL_FEED = 'https://startupthoughts.substack.com/feed'
 ADVISOR_FEED = 'https://advisormike.substack.com/feed'
 
 MNL_N = 4          # how many Mike & Ned issues to show
-ADVISOR_N = 20      # max advisor posts to pull (shows all recent)
+ADVISOR_N = 5        # how many advisor posts to show
 DESC_MAX = 220      # characters for preview text
 
 
