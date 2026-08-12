@@ -1,221 +1,368 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>The Companies I Work With</title>
-<style>
-  @page { size: letter; margin: 0.6in; }
-  * { box-sizing: border-box; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    color: #2b2320;
-    background: #faf7f2;
-    margin: 0;
-    padding: 40px 24px;
-  }
-  .wrap { max-width: 880px; margin: 0 auto; }
-  header {
-    text-align: center;
-    margin-bottom: 36px;
-    padding-bottom: 20px;
-    border-bottom: 3px double #b08d57;
-  }
-  header h1 {
-    font-size: 34px;
-    margin: 0;
-    letter-spacing: 0.5px;
-    color: #1f1a17;
-  }
-  .client {
-    display: flex;
-    gap: 22px;
-    padding: 22px 0;
-    border-bottom: 1px solid #e2d8c8;
-    page-break-inside: avoid;
-  }
-  .client:last-child { border-bottom: none; }
-  .photo {
-    flex: 0 0 110px;
-    width: 110px;
-    height: 110px;
-    border-radius: 8px;
-    background: #efe6d8;
-    border: 1px solid #d9c9ac;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 30px;
-    font-weight: bold;
-    color: #b08d57;
-  }
-  .info { flex: 1; }
-  .info h2 {
-    margin: 0 0 2px;
-    font-size: 19px;
-    color: #1f1a17;
-  }
-  .company {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #b08d57;
-    font-weight: bold;
-    margin: 0 0 8px;
-  }
-  .info p {
-    margin: 0;
-    font-size: 14.5px;
-    line-height: 1.5;
-    color: #3a322c;
-  }
-  .meta {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    color: #a89c8b;
-    margin: 0 0 8px !important;
-  }
-  footer {
-    margin-top: 36px;
-    text-align: center;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    color: #a89c8b;
-  }
-  @media print {
-    body { background: #fff; padding: 0; }
-    .client { break-inside: avoid; }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Clients — Mike Lewis</title>
+  <meta name="description" content="The companies and founders Mike is working with right now." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mike Lewis" />
+  <meta property="og:title" content="Clients — Mike Lewis" />
+  <meta property="og:description" content="The companies and founders Mike is working with right now." />
+  <meta property="og:url" content="https://mikelewis.me/clients.html" />
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(48px, 6vw, 80px); }
+    .page-hero h1 { max-width: 15ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 54ch; }
+
+    /* Roster --------------------------------------------------------- */
+    .roster {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .client {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .client { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+    }
+
+    .client .who {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .client .avatar {
+      flex: 0 0 64px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--paper-3);
+      border: 1px solid var(--rule-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      color: var(--accent-ink);
+    }
+    .client .who-text { display: flex; flex-direction: column; gap: 6px; }
+    .client .name {
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+    }
+    .client .duration {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .client .detail { display: flex; flex-direction: column; gap: 12px; }
+    .client .company {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+    }
+    .client .body {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.4vw, 20px);
+      font-weight: 300;
+      line-height: 1.45;
+      letter-spacing: -0.005em;
+      color: var(--ink-2);
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>The Companies I Work With</h1>
-  </header>
-  <div class="client">
-    <div class="photo">NM</div>
-    <div class="info">
-      <h2>Nachi Mehta</h2>
-      <p class="company">Stackless &mdash; AI Platform for Data Teams</p>
-      <p class="meta">Working together 3 months</p>
-      <p>Stackless helps large companies wrangle messy, scattered data into something people can actually use. Meaning, they use AI to auto-create dashboards and insights for these businesses. Their secret sauce is they know how to fix and fine-tune the "plumbing" so the AI actually works. Nachi is smart (graduated high school at 15) and had been doing this as a consultant for years before starting the company. He has a small team of 4&ndash;6.</p>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Clients">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Clients</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        The companies I <em>work with</em>.
+      </h1>
+      <p class="lede reveal">
+        The founders and teams I'm partnered with right now — what they're
+        building, and a little about the people behind them.
+      </p>
+    </div>
+  </section>
+
+  <section data-screen-label="Clients / Roster" style="padding-top:0;">
+    <div class="wrap">
+      <div class="roster">
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">NM</div>
+            <div class="who-text">
+              <span class="name">Nachi Mehta</span>
+              <span class="duration">3 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Stackless — AI Platform for Data Teams</span>
+            <p class="body">Stackless helps large companies wrangle messy, scattered data into something people can actually use. Meaning, they use AI to auto-create dashboards and insights for these businesses. Their secret sauce is they know how to fix and fine-tune the "plumbing" so the AI actually works. Nachi is smart (graduated high school at 15) and had been doing this as a consultant for years before starting the company. He has a small team of 4–6.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">AG</div>
+            <div class="who-text">
+              <span class="name">Austin Geraci</span>
+              <span class="duration">47 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">WorldTech IT — Cybersecurity &amp; Networking</span>
+            <p class="body">Austin built WorldTech into a serious IT security and networking company out of Austin, TX, with its own SaaS products layered on top. He's a true builder: he loves the start of things, and he's also a great musician on the side. He's actively working on selling WTIT and starting another business focused on AI hardware.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">MF</div>
+            <div class="who-text">
+              <span class="name">Madeline Fraser</span>
+              <span class="duration">3 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Gemist — AI and Website SaaS for the Jewelry Industry</span>
+            <p class="body">80% of all jewelry is custom designed. Gemist lets jewelry retailers work with clients faster and more easily by using AI to create images and mockups for customers, both in-person and on the web. She also connects jewelers to brands and manufacturers of stones, and is in the middle of raising a round with the largest jewelry insurer. Madeline is a repeat founder. She lives in Ojai and runs a working farm — vineyard, chickens, and all.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">ME</div>
+            <div class="who-text">
+              <span class="name">Max Eisendrath</span>
+              <span class="duration">52 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Redflag — AI Content Protection</span>
+            <p class="body">Redflag listens to the web and can find any piece of content, anywhere, especially on social media and piracy sites. They use their technology to help content creators and content owners — from major sports leagues to YouTube creators — from having their work stolen and reposted online. Max is a sole founder who still codes, still manages his engineering team, and is building partnerships with some of the biggest names in media.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">JP</div>
+            <div class="who-text">
+              <span class="name">JP</span>
+              <span class="duration">29 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Storyboard — AI Platform for Trucking Fleets</span>
+            <p class="body">Storyboard brings AI-powered automation to trucking and fleet dispatch — replacing paperwork and guesswork with tools that keep drivers safer and fleets running smoothly. They've grown steadily and are shooting for a big year. JP is a great founder who's also a big-time movie buff (like me!).</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">DL</div>
+            <div class="who-text">
+              <span class="name">David Lewis</span>
+              <span class="duration">8 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">MoveEV — EV Fleet Charging</span>
+            <p class="body">MoveEV makes sure businesses that have electric vehicle fleets can repay their employees accurately for charging costs. This is unglamorous but essential infrastructure for the EV transition. David's a local hustler with a small team, trying to bootstrap to profitability. He's a Marin County dad who coaches his daughter's softball team between sales calls.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">HA</div>
+            <div class="who-text">
+              <span class="name">Henry Abenaim</span>
+              <span class="duration">52 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Fundingo — SaaS Platform for Lenders</span>
+            <p class="body">Fundingo builds software for complex lending operators (think a hot tub business that also makes loans). They're growing fast. Henry's a father of five who is genuinely curious about all things.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">AC</div>
+            <div class="who-text">
+              <span class="name">Avinash Joshi &amp; Ajith</span>
+              <span class="duration">16 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Cactus — AI for Home Services Companies</span>
+            <p class="body">A YC company building software for HVAC and home services businesses to help them capture more leads. Their AI answers incoming phone calls, does auto outreach to leads via text and phone calls, and follows up with leads via text, email and phone so the companies can book more jobs. Avinash (CTO) and Ajith (CEO) are college best friends.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">K</div>
+            <div class="who-text">
+              <span class="name">Kyle</span>
+              <span class="duration">9 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Wild West Social House — Membership Club &amp; Fashion Rental</span>
+            <p class="body">A Rent the Runway meets Soho House — a boutique membership in LA that lets people rent high-fashion gear (bags, shoes, clothes) and also attend fun events like poker nights and a Coachella tent. They have celebrities and stylists as customers and are growing nicely, with plans for ecommerce and New York next. Kyle is both a former male model and a huge growth-mindset data nerd.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">JH</div>
+            <div class="who-text">
+              <span class="name">Jake Hirabayashi</span>
+              <span class="duration">41 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">The Futures App — Youth Sports Software</span>
+            <p class="body">The Futures App is software (with built-in payments and banking) for youth sports organizations across the country. Growing steadily. Jake, a former pro baseball player (MN Twins!), is CEO of a small 12-person team. They're actively talking with private equity now so they can get access to more capital and start to acquire adjacent businesses into one platform.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">SM</div>
+            <div class="who-text">
+              <span class="name">Shazil Mehkri</span>
+              <span class="duration">44 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Sastaticket — Online Travel</span>
+            <p class="body">The leading online travel booking platform in Pakistan, coming up on its 10th anniversary. Shazil is bringing U.S. tactics to the Pakistani market. Growth is slow but they're profitable, and as the market matures, they should scale accordingly. Shazil loves to watch and train for MMA, and has two daughters and one dog (Bernie Sanders).</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">PE</div>
+            <div class="who-text">
+              <span class="name">Jake Yurek &amp; Evan Anderson</span>
+              <span class="duration">Just started</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Pearl Edison — Home Electrification Marketplace</span>
+            <p class="body">College friends from Notre Dame building a marketplace that connects homeowners with vetted contractors for home electrification — heat pumps, hot water, weatherization — partnering with utilities to make it easy. We just started working together in August, so we're still getting to know each other.</p>
+          </div>
+        </div>
+
+        <div class="client reveal">
+          <div class="who">
+            <div class="avatar">JB</div>
+            <div class="who-text">
+              <span class="name">Jori Bell</span>
+              <span class="duration">12 months</span>
+            </div>
+          </div>
+          <div class="detail">
+            <span class="company">Hampton — Founder Community</span>
+            <p class="body">She's the Head of Product for Hampton's core groups — groups of 8 founders that meet monthly. A good product leader (former Amazon and Spotify) and former full-time coach of founders, she's about to leave for maternity leave from October to January.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></li>
+      </ul>
     </div>
   </div>
-  <div class="client">
-    <div class="photo">AG</div>
-    <div class="info">
-      <h2>Austin Geraci</h2>
-      <p class="company">WorldTech IT &mdash; Cybersecurity &amp; Networking</p>
-      <p class="meta">Working together 47 months</p>
-      <p>Austin built WorldTech into a serious IT security and networking company out of Austin, TX, with its own SaaS products layered on top. He's a true builder: he loves the start of things, and he's also a great musician on the side. He's actively working on selling WTIT and starting another business focused on AI hardware.</p>
-    </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Made in Marin, California</span>
   </div>
-  <div class="client">
-    <div class="photo">MF</div>
-    <div class="info">
-      <h2>Madeline Fraser</h2>
-      <p class="company">Gemist &mdash; AI and Website SaaS for the Jewelry Industry</p>
-      <p class="meta">Working together 3 months</p>
-      <p>80% of all jewelry is custom designed. Gemist lets jewelry retailers work with clients faster and more easily by using AI to create images and mockups for customers, both in-person and on the web. She also connects jewelers to brands and manufacturers of stones, and is in the middle of raising a round with the largest jewelry insurer. Madeline is a repeat founder. She lives in Ojai and runs a working farm &mdash; vineyard, chickens, and all.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">ME</div>
-    <div class="info">
-      <h2>Max Eisendrath</h2>
-      <p class="company">Redflag &mdash; AI Content Protection</p>
-      <p class="meta">Working together 52 months</p>
-      <p>Redflag listens to the web and can find any piece of content, anywhere, especially on social media and piracy sites. They use their technology to help content creators and content owners &mdash; from major sports leagues to YouTube creators &mdash; from having their work stolen and reposted online. Max is a sole founder who still codes, still manages his engineering team, and is building partnerships with some of the biggest names in media.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">JP</div>
-    <div class="info">
-      <h2>JP</h2>
-      <p class="company">Storyboard &mdash; AI Platform for Trucking Fleets</p>
-      <p class="meta">Working together 29 months</p>
-      <p>Storyboard brings AI-powered automation to trucking and fleet dispatch &mdash; replacing paperwork and guesswork with tools that keep drivers safer and fleets running smoothly. They've grown steadily and are shooting for a big year. JP is a great founder who's also a big-time movie buff (like me!).</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">DL</div>
-    <div class="info">
-      <h2>David Lewis</h2>
-      <p class="company">MoveEV &mdash; EV Fleet Charging</p>
-      <p class="meta">Working together 8 months</p>
-      <p>MoveEV makes sure businesses that have electric vehicle fleets can repay their employees accurately for charging costs. This is unglamorous but essential infrastructure for the EV transition. David's a local hustler with a small team, trying to bootstrap to profitability. He's a Marin County dad who coaches his daughter's softball team between sales calls.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">HA</div>
-    <div class="info">
-      <h2>Henry Abenaim</h2>
-      <p class="company">Fundingo &mdash; SaaS Platform for Lenders</p>
-      <p class="meta">Working together 52 months</p>
-      <p>Fundingo builds software for complex lending operators (think a hot tub business that also makes loans). They're growing fast. Henry's a father of five who is genuinely curious about all things.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">AC</div>
-    <div class="info">
-      <h2>Avinash Joshi &amp; Ajith</h2>
-      <p class="company">Cactus &mdash; AI for Home Services Companies</p>
-      <p class="meta">Working together 16 months</p>
-      <p>A YC company building software for HVAC and home services businesses to help them capture more leads. Their AI answers incoming phone calls, does auto outreach to leads via text and phone calls, and follows up with leads via text, email and phone so the companies can book more jobs. Avinash (CTO) and Ajith (CEO) are college best friends.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">K</div>
-    <div class="info">
-      <h2>Kyle</h2>
-      <p class="company">Wild West Social House &mdash; Membership Club &amp; Fashion Rental</p>
-      <p class="meta">Working together 9 months</p>
-      <p>A Rent the Runway meets Soho House &mdash; a boutique membership in LA that lets people rent high-fashion gear (bags, shoes, clothes) and also attend fun events like poker nights and a Coachella tent. They have celebrities and stylists as customers and are growing nicely, with plans for ecommerce and New York next. Kyle is both a former male model and a huge growth-mindset data nerd.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">JH</div>
-    <div class="info">
-      <h2>Jake Hirabayashi</h2>
-      <p class="company">The Futures App &mdash; Youth Sports Software</p>
-      <p class="meta">Working together 41 months</p>
-      <p>The Futures App is software (with built-in payments and banking) for youth sports organizations across the country. Growing steadily. Jake, a former pro baseball player (MN Twins!), is CEO of a small 12-person team. They're actively talking with private equity now so they can get access to more capital and start to acquire adjacent businesses into one platform.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">SM</div>
-    <div class="info">
-      <h2>Shazil Mehkri</h2>
-      <p class="company">Sastaticket &mdash; Online Travel</p>
-      <p class="meta">Working together 44 months</p>
-      <p>The leading online travel booking platform in Pakistan, coming up on its 10th anniversary. Shazil is bringing U.S. tactics to the Pakistani market. Growth is slow but they're profitable, and as the market matures, they should scale accordingly. Shazil loves to watch and train for MMA, and has two daughters and one dog (Bernie Sanders).</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">PE</div>
-    <div class="info">
-      <h2>Jake Yurek &amp; Evan Anderson</h2>
-      <p class="company">Pearl Edison &mdash; Home Electrification Marketplace</p>
-      <p class="meta">Just started</p>
-      <p>College friends from Notre Dame building a marketplace that connects homeowners with vetted contractors for home electrification &mdash; heat pumps, hot water, weatherization &mdash; partnering with utilities to make it easy. We just started working together in August, so we're still getting to know each other.</p>
-    </div>
-  </div>
-  <div class="client">
-    <div class="photo">JB</div>
-    <div class="info">
-      <h2>Jori Bell</h2>
-      <p class="company">Hampton &mdash; Founder Community</p>
-      <p class="meta">Working together 12 months</p>
-      <p>She's the Head of Product for Hampton's core groups &mdash; groups of 8 founders that meet monthly. A good product leader (former Amazon and Spotify) and former full-time coach of founders, she's about to leave for maternity leave from October to January.</p>
-    </div>
-  </div>
-  <footer>
-    Compiled by Mike Lewis &middot; Photos to come
-  </footer>
-</div>
+</footer>
+
+<script src="site.js"></script>
 </body>
 </html>
