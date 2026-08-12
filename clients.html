@@ -56,7 +56,18 @@
       font-size: 15px;
       letter-spacing: 0.06em;
       color: var(--accent-ink);
+      overflow: hidden;
     }
+    .client .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .client .avatar.pair {
+      flex: 0 0 auto; width: auto; height: auto;
+      background: none; border: none; overflow: visible; display: flex;
+    }
+    .client .avatar.pair img {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 2px solid var(--paper); object-fit: cover; display: block;
+    }
+    .client .avatar.pair img + img { margin-left: -18px; }
     .client .who-text { display: flex; flex-direction: column; gap: 6px; }
     .client .name {
       font-family: var(--serif);
@@ -140,7 +151,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">NM</div>
+            <div class="avatar"><img src="images/clients/nachi-mehta.png" alt="Nachi Mehta"></div>
             <div class="who-text">
               <span class="name">Nachi Mehta</span>
               <span class="duration">3 months</span>
@@ -154,7 +165,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">AG</div>
+            <div class="avatar"><img src="images/clients/austin-geraci.png" alt="Austin Geraci"></div>
             <div class="who-text">
               <span class="name">Austin Geraci</span>
               <span class="duration">47 months</span>
@@ -168,7 +179,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">MF</div>
+            <div class="avatar"><img src="images/clients/madeline-fraser.png" alt="Madeline Fraser"></div>
             <div class="who-text">
               <span class="name">Madeline Fraser</span>
               <span class="duration">3 months</span>
@@ -196,7 +207,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">JP</div>
+            <div class="avatar"><img src="images/clients/jp-gooderham.png" alt="JP"></div>
             <div class="who-text">
               <span class="name">JP</span>
               <span class="duration">29 months</span>
@@ -224,7 +235,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">HA</div>
+            <div class="avatar"><img src="images/Henry%20headshot.jpeg" alt="Henry Abenaim"></div>
             <div class="who-text">
               <span class="name">Henry Abenaim</span>
               <span class="duration">52 months</span>
@@ -238,7 +249,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">AC</div>
+            <div class="avatar"><img src="images/clients/avinash-joshi.png" alt="Avinash Joshi"></div>
             <div class="who-text">
               <span class="name">Avinash Joshi &amp; Ajith</span>
               <span class="duration">16 months</span>
@@ -252,7 +263,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">K</div>
+            <div class="avatar"><img src="images/kyle%20headshot.jpeg" alt="Kyle"></div>
             <div class="who-text">
               <span class="name">Kyle</span>
               <span class="duration">9 months</span>
@@ -266,7 +277,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">JH</div>
+            <div class="avatar"><img src="images/clients/jake-hirabayashi.png" alt="Jake Hirabayashi"></div>
             <div class="who-text">
               <span class="name">Jake Hirabayashi</span>
               <span class="duration">41 months</span>
@@ -280,7 +291,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">SM</div>
+            <div class="avatar"><img src="images/clients/shazil-mehkri.png" alt="Shazil Mehkri"></div>
             <div class="who-text">
               <span class="name">Shazil Mehkri</span>
               <span class="duration">44 months</span>
@@ -294,7 +305,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">PE</div>
+            <div class="avatar pair"><img src="images/clients/jake-yurek.png" alt="Jake Yurek"><img src="images/clients/evan-anderson.png" alt="Evan Anderson"></div>
             <div class="who-text">
               <span class="name">Jake Yurek &amp; Evan Anderson</span>
               <span class="duration">Just started</span>
@@ -308,7 +319,7 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar">JB</div>
+            <div class="avatar"><img src="images/clients/jori-bell.png" alt="Jori Bell"></div>
             <div class="who-text">
               <span class="name">Jori Bell</span>
               <span class="duration">12 months</span>
