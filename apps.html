@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apps — Mike Lewis</title>
+  <meta name="description" content="Apps Mike Lewis built for his own daily life — MealBuddy, WatchLog, Core Memories, Cullify, Witsy and more. Most are live; try any of them." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mike Lewis" />
+  <meta property="og:title" content="Apps — Mike Lewis" />
+  <meta property="og:description" content="Apps Mike Lewis built for his own daily life — MealBuddy, WatchLog, Core Memories, Cullify, Witsy and more. Most are live; try any of them." />
+  <meta property="og:image" content="https://mikelewis.me/images/Main%20Image%20of%20Mike.jpg" />
+  <meta property="og:url" content="https://mikelewis.me/apps.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .page-hero { padding: clamp(72px, 10vw, 140px) 0 clamp(40px, 5vw, 64px); }
+    .page-hero h1 { max-width: 16ch; }
+    .page-hero .lede { margin-top: 32px; max-width: 62ch; }
+
+    /* App grid ---------------------------------------------------- */
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 980px) { .apps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 680px) { .apps { grid-template-columns: 1fr; } }
+
+    .app {
+      position: relative;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      background: var(--paper);
+      padding: clamp(26px, 2.6vw, 34px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: background .25s ease, border-color .25s ease;
+    }
+    .app:hover { background: var(--paper-2); border-color: var(--rule-strong); }
+    a.app:hover { border-color: var(--ink); }
+
+    .app .top-row {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+    }
+    .app .cat {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+      padding: 6px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--accent) 9%, transparent);
+      white-space: nowrap;
+    }
+    .app .index {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--muted-2);
+    }
+
+    .app h3 {
+      font-size: clamp(24px, 2.1vw, 30px);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+    }
+    .app h3 em { font-style: italic; color: var(--accent-ink); font-weight: 300; }
+
+    .app .desc {
+      font-family: var(--serif);
+      font-size: clamp(16px, 1.2vw, 18px);
+      font-weight: 300;
+      line-height: 1.45;
+      letter-spacing: -0.004em;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
+    .app .features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .app .features li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink-2);
+    }
+    .app .features li .k {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent-ink);
+    }
+
+    .app .foot {
+      margin-top: auto;
+      padding-top: 6px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .app .foot .domain { color: var(--accent-ink); }
+    .app .foot .private { color: var(--muted); }
+    .app .foot .arrow { font-size: 15px; transition: transform .2s ease; }
+    a.app:hover .foot .arrow { transform: translate(2px, -2px); }
+
+    /* Closing band ------------------------------------------------ */
+    .apps-note {
+      margin-top: 24px;
+      border: 1px solid var(--ink);
+      border-radius: 16px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: clamp(32px, 4vw, 52px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .apps-note h3 { color: var(--paper); font-size: clamp(24px, 2.4vw, 34px); max-width: 20ch; }
+    .apps-note h3 em { font-style: italic; color: color-mix(in oklab, var(--accent) 55%, var(--paper)); font-weight: 300; }
+    .apps-note p { color: color-mix(in oklab, var(--paper) 74%, transparent); max-width: 44ch; margin: 12px 0 0; font-size: 15px; }
+    .apps-note .btn { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .apps-note .btn:hover { background: var(--paper-2); }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+      <a href="apps.html" class="active">Apps</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+    <button class="nav-mobile-toggle" aria-label="Menu">≡</button>
+  </div>
+  <div class="nav-drawer" hidden>
+    <nav class="nav-links" aria-label="Mobile">
+      <a href="index.html">Home</a>
+      <a href="my-background.html">My Background</a>
+      <a href="work-with-me.html">Work With Me</a>
+      <a href="companies.html">Companies</a>
+      <a href="writing.html">Writing</a>
+      <a href="apps.html">Apps</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Contact &nbsp;→</a>
+  </div>
+</header>
+
+<main data-screen-label="Apps">
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">Apps</p>
+      <h1 class="reveal" style="margin-top:28px;">
+        Things I <em>built</em> for myself.
+      </h1>
+      <p class="lede reveal">
+        These are all apps I wanted to use throughout my daily life that didn't
+        exist, so I built them. They're side projects, but most are live — click
+        through to try any of them.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;" data-screen-label="Apps / The apps">
+    <div class="wrap">
+      <div class="apps">
+
+        <a class="app reveal" href="https://mealbuddy.us" target="_blank" rel="noopener" data-screen-label="Apps / MealBuddy">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Health &amp; Nutrition</span>
+            <span class="index">01</span>
+          </div>
+          <h3><em>MealBuddy</em>.</h3>
+          <p class="desc">
+            Log food and meals using just your camera, see your weekly nutrition
+            stats, then chat with AI about your habits and get suggestions.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Log any meal by pointing your camera.</span></li>
+            <li><span class="k">02</span><span>Weekly nutrition stats at a glance.</span></li>
+            <li><span class="k">03</span><span>Chat with AI about your habits.</span></li>
+          </ul>
+          <div class="foot"><span class="domain">mealbuddy.us</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://watchlog.us" target="_blank" rel="noopener" data-screen-label="Apps / WatchLog">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Watchlist</span>
+            <span class="index">02</span>
+          </div>
+          <h3><em>WatchLog</em>.</h3>
+          <p class="desc">
+            Log the shows and films you watch so you can share with friends — or
+            ask AI what you should watch next.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>A running log of everything you watch.</span></li>
+            <li><span class="k">02</span><span>Share your list with friends.</span></li>
+            <li><span class="k">03</span><span>AI recommendations for what's next.</span></li>
+          </ul>
+          <div class="foot"><span class="domain">watchlog.us</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://corememories.us" target="_blank" rel="noopener" data-screen-label="Apps / Core Memories">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Memories</span>
+            <span class="index">03</span>
+          </div>
+          <h3>Core <em>Memories</em>.</h3>
+          <p class="desc">
+            Record the moments that matter so you can relive them later. Each day
+            surfaces an old memory to enjoy — Readwise for life's greatest moments.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Capture moments as they happen.</span></li>
+            <li><span class="k">02</span><span>A daily resurfaced memory.</span></li>
+            <li><span class="k">03</span><span>Your own private archive to revisit.</span></li>
+          </ul>
+          <div class="foot"><span class="domain">corememories.us</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://cullify.com" target="_blank" rel="noopener" data-screen-label="Apps / Cullify">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Fundraising</span>
+            <span class="index">04</span>
+          </div>
+          <h3><em>Cullify</em>.</h3>
+          <p class="desc">
+            Dive into a database of every VC who's invested over the past few
+            years. Filter to build a target list of investors to go after.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Searchable database of recent VC investments.</span></li>
+            <li><span class="k">02</span><span>Filter by location, check size and recency.</span></li>
+            <li><span class="k">03</span><span>Build a focused target list.</span></li>
+          </ul>
+          <div class="foot"><span class="domain">cullify.com</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://witsy.com" target="_blank" rel="noopener" data-screen-label="Apps / Witsy">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Coaching</span>
+            <span class="index">05</span>
+          </div>
+          <h3><em>Witsy</em>.</h3>
+          <p class="desc">
+            Your second brain for coaching. Witsy helps coaches and advisors
+            compound insight instead of relying on memory, notes, or vibes.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Extracts action items for you and your client.</span></li>
+            <li><span class="k">02</span><span>Surfaces patterns across meetings.</span></li>
+            <li><span class="k">03</span><span>Analyzes your performance as a coach.</span></li>
+          </ul>
+          <div class="foot"><span class="domain">witsy.com</span><span class="arrow">↗</span></div>
+        </a>
+
+        <article class="app reveal" data-screen-label="Apps / Guitar practice">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Music</span>
+            <span class="index">06</span>
+          </div>
+          <h3>Guitar <em>practice</em>.</h3>
+          <p class="desc">
+            Upload the songs you're working on. It holds your sheet music so you
+            have it on the go, and lets you log practice time and sessions.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Carry your sheet music anywhere.</span></li>
+            <li><span class="k">02</span><span>Log practice time and sessions.</span></li>
+            <li><span class="k">03</span><span>Every song you're working on in one place.</span></li>
+          </ul>
+          <div class="foot"><span class="private">Personal project</span></div>
+        </article>
+
+      </div>
+
+      <div class="apps-note reveal">
+        <div>
+          <h3>Built something you'd <em>use</em>?</h3>
+          <p>These started as tools for my own daily life. If one's useful to you, take it for a spin — or reach out if you'd like to talk about it.</p>
+        </div>
+        <a href="contact.html" class="btn">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="brand"><span class="dot"></span> Mike Lewis</a>
+      <p class="tagline" style="margin-top:16px;">Helping great founders become great CEOs.</p>
+      <p class="mono" style="font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:0;">Partner · Enjoy The Work</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="my-background.html">My Background</a></li>
+        <li><a href="work-with-me.html">Work With Me</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul class="footer-nav">
+        <li><a href="companies.html">Companies</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="apps.html">Apps</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Elsewhere</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/mikelewis/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:mike@mikelewis.me">mike@mikelewis.me</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <span>© 2026 Mike Lewis</span>
+    <span>Made in Marin, California</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
