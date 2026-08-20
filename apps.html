@@ -121,6 +121,31 @@
     .app .foot .arrow { font-size: 15px; transition: transform .2s ease; }
     a.app:hover .foot .arrow { transform: translate(2px, -2px); }
 
+    .app .why {
+      border-top: 1px dashed var(--rule);
+      padding-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .app .why .lbl {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-ink);
+    }
+    .app .why p {
+      font-family: var(--serif);
+      font-size: 14.5px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      letter-spacing: -0.003em;
+      color: var(--ink-2);
+      margin: 0;
+    }
+
     /* Closing band ------------------------------------------------ */
     .apps-note {
       margin-top: 24px;
@@ -204,25 +229,33 @@
             <li><span class="k">02</span><span>Weekly nutrition stats at a glance.</span></li>
             <li><span class="k">03</span><span>Chat with AI about your habits.</span></li>
           </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I'm almost 50 now, and I pay a lot closer attention to what goes into my body. This keeps an honest eye on my diet and nudges me toward eating better.</p>
+          </div>
           <div class="foot"><span class="domain">mealbuddy.us</span><span class="arrow">↗</span></div>
         </a>
 
-        <a class="app reveal" href="https://watchlog.us" target="_blank" rel="noopener" data-screen-label="Apps / WatchLog">
+        <a class="app reveal" href="https://cullify.com" target="_blank" rel="noopener" data-screen-label="Apps / Cullify">
           <div class="top-row">
-            <span class="cat"><span class="dot"></span> Watchlist</span>
+            <span class="cat"><span class="dot"></span> Fundraising</span>
             <span class="index">02</span>
           </div>
-          <h3><em>WatchLog</em>.</h3>
+          <h3><em>Cullify</em>.</h3>
           <p class="desc">
-            Log the shows and films you watch so you can share with friends — or
-            ask AI what you should watch next.
+            Dive into a database of every VC who's invested over the past few
+            years. Filter to build a target list of investors to go after.
           </p>
           <ul class="features">
-            <li><span class="k">01</span><span>A running log of everything you watch.</span></li>
-            <li><span class="k">02</span><span>Share your list with friends.</span></li>
-            <li><span class="k">03</span><span>AI recommendations for what's next.</span></li>
+            <li><span class="k">01</span><span>Searchable database of recent VC investments.</span></li>
+            <li><span class="k">02</span><span>Filter by location, check size and recency.</span></li>
+            <li><span class="k">03</span><span>Build a focused target list.</span></li>
           </ul>
-          <div class="foot"><span class="domain">watchlog.us</span><span class="arrow">↗</span></div>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>Finding investors is a universal startup challenge. I get a firehose of deal data every day, so I turned it into a database of who's actually active — so my clients can fill their funnel and find capital faster.</p>
+          </div>
+          <div class="foot"><span class="domain">cullify.com</span><span class="arrow">↗</span></div>
         </a>
 
         <a class="app reveal" href="https://corememories.us" target="_blank" rel="noopener" data-screen-label="Apps / Core Memories">
@@ -240,25 +273,33 @@
             <li><span class="k">02</span><span>A daily resurfaced memory.</span></li>
             <li><span class="k">03</span><span>Your own private archive to revisit.</span></li>
           </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I believe gratitude is the real secret to being happy day to day. The little moments are actually the big ones, and this helps me notice them and hold on.</p>
+          </div>
           <div class="foot"><span class="domain">corememories.us</span><span class="arrow">↗</span></div>
         </a>
 
-        <a class="app reveal" href="https://cullify.com" target="_blank" rel="noopener" data-screen-label="Apps / Cullify">
+        <a class="app reveal" href="https://watchlog.us" target="_blank" rel="noopener" data-screen-label="Apps / WatchLog">
           <div class="top-row">
-            <span class="cat"><span class="dot"></span> Fundraising</span>
+            <span class="cat"><span class="dot"></span> Movies</span>
             <span class="index">04</span>
           </div>
-          <h3><em>Cullify</em>.</h3>
+          <h3><em>WatchLog</em>.</h3>
           <p class="desc">
-            Dive into a database of every VC who's invested over the past few
-            years. Filter to build a target list of investors to go after.
+            Log the shows and films you watch so you can share with friends — or
+            ask AI what you should watch next.
           </p>
           <ul class="features">
-            <li><span class="k">01</span><span>Searchable database of recent VC investments.</span></li>
-            <li><span class="k">02</span><span>Filter by location, check size and recency.</span></li>
-            <li><span class="k">03</span><span>Build a focused target list.</span></li>
+            <li><span class="k">01</span><span>A running log of everything you watch.</span></li>
+            <li><span class="k">02</span><span>Share your list with friends.</span></li>
+            <li><span class="k">03</span><span>AI recommendations for what's next.</span></li>
           </ul>
-          <div class="foot"><span class="domain">cullify.com</span><span class="arrow">↗</span></div>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>My wife spent years in the film industry and we're serious movie watchers. There's an ocean of great content out there — this helps me find the next thing and see what friends are watching, so it's almost always a hit.</p>
+          </div>
+          <div class="foot"><span class="domain">watchlog.us</span><span class="arrow">↗</span></div>
         </a>
 
         <a class="app reveal" href="https://witsy.com" target="_blank" rel="noopener" data-screen-label="Apps / Witsy">
@@ -276,6 +317,10 @@
             <li><span class="k">02</span><span>Surfaces patterns across meetings.</span></li>
             <li><span class="k">03</span><span>Analyzes your performance as a coach.</span></li>
           </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>Keeping a real repository on my clients has made me a better advisor. I can look back and analyze my own coaching, and it keeps me and the business organized.</p>
+          </div>
           <div class="foot"><span class="domain">witsy.com</span><span class="arrow">↗</span></div>
         </a>
 
@@ -294,6 +339,10 @@
             <li><span class="k">02</span><span>Log practice time and sessions.</span></li>
             <li><span class="k">03</span><span>Every song you're working on in one place.</span></li>
           </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I wanted to hold myself accountable for actually practicing, and to keep my sheet music and techniques all in one place.</p>
+          </div>
           <div class="foot"><span class="private">Personal project</span></div>
         </article>
 
