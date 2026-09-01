@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Apps — Mike Lewis</title>
-  <meta name="description" content="Apps Mike Lewis built for his own daily life — MealBuddy, WatchLog, Core Memories, Cullify, Witsy and more. Most are live; try any of them." />
+  <meta name="description" content="Apps Mike Lewis built — for his work with founders and for his own daily life. Most are live; try any of them." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Mike Lewis" />
   <meta property="og:title" content="Apps — Mike Lewis" />
-  <meta property="og:description" content="Apps Mike Lewis built for his own daily life — MealBuddy, WatchLog, Core Memories, Cullify, Witsy and more. Most are live; try any of them." />
+  <meta property="og:description" content="Apps Mike Lewis built — for his work with founders and for his own daily life. Most are live; try any of them." />
   <meta property="og:image" content="https://mikelewis.me/images/Main%20Image%20of%20Mike.jpg" />
   <meta property="og:url" content="https://mikelewis.me/apps.html" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -22,10 +22,9 @@
     /* App grid ---------------------------------------------------- */
     .apps {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
-    @media (max-width: 980px) { .apps { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 680px) { .apps { grid-template-columns: 1fr; } }
 
     .app {
@@ -200,40 +199,46 @@
     <div class="wrap">
       <p class="eyebrow reveal">Apps</p>
       <h1 class="reveal" style="margin-top:28px;">
-        Things I <em>built</em> for myself.
+        Things I <em>built</em>.
       </h1>
       <p class="lede reveal">
-        These are all apps I wanted to use throughout my daily life that didn't
-        exist, so I built them. They're side projects, but most are live — click
-        through to try any of them.
+        Some I built for my work with founders, others just for my own daily
+        life. Most are live — click through to try any of them.
       </p>
     </div>
   </section>
 
-  <section style="padding-top: clamp(48px, 6vw, 80px);" data-screen-label="Apps / The apps">
+  <!-- WORK -->
+  <section data-screen-label="Apps / For work">
     <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">For work</span></div>
+        <h2>Apps I built for <em>work</em>.</h2>
+      </div>
+
       <div class="apps">
 
-        <a class="app reveal" href="https://mealbuddy.us" target="_blank" rel="noopener" data-screen-label="Apps / MealBuddy">
+        <a class="app reveal" href="https://enjoythefundraise.ai" target="_blank" rel="noopener" data-screen-label="Apps / Enjoy the Fundraise">
           <div class="top-row">
-            <span class="cat"><span class="dot"></span> Health &amp; Nutrition</span>
+            <span class="cat"><span class="dot"></span> Pitch Feedback</span>
             <span class="index">01</span>
           </div>
-          <h3><em>MealBuddy</em>.</h3>
+          <h3>Enjoy the <em>Fundraise</em>.</h3>
           <p class="desc">
-            Log food and meals using just your camera, see your weekly nutrition
-            stats, then chat with AI about your habits and get suggestions.
+            Paste in your pitch and get a detailed, investor-grade breakdown —
+            what's landing, what's weak, and exactly how to sharpen it before
+            you raise.
           </p>
           <ul class="features">
-            <li><span class="k">01</span><span>Log any meal by pointing your camera.</span></li>
-            <li><span class="k">02</span><span>Weekly nutrition stats at a glance.</span></li>
-            <li><span class="k">03</span><span>Chat with AI about your habits.</span></li>
+            <li><span class="k">01</span><span>A detailed critique of your pitch.</span></li>
+            <li><span class="k">02</span><span>Investor-grade analysis of your story.</span></li>
+            <li><span class="k">03</span><span>Specific fixes before you're in the room.</span></li>
           </ul>
           <div class="why">
             <span class="lbl">Why I built this</span>
-            <p>I'm almost 50 now, and I pay a lot closer attention to what goes into my body. This keeps an honest eye on my diet and nudges me toward eating better.</p>
+            <p>Raising money is one of the hardest, loneliest parts of building a company, and most founders are guessing at whether their pitch actually lands. I built this so any founder can get honest, investor-grade feedback before they're sitting across from a VC.</p>
           </div>
-          <div class="foot"><span class="domain">mealbuddy.us</span><span class="arrow">↗</span></div>
+          <div class="foot"><span class="domain">enjoythefundraise.ai</span><span class="arrow">↗</span></div>
         </a>
 
         <a class="app reveal" href="https://cullify.com" target="_blank" rel="noopener" data-screen-label="Apps / Cullify">
@@ -258,54 +263,10 @@
           <div class="foot"><span class="domain">cullify.com</span><span class="arrow">↗</span></div>
         </a>
 
-        <a class="app reveal" href="https://corememories.us" target="_blank" rel="noopener" data-screen-label="Apps / Core Memories">
-          <div class="top-row">
-            <span class="cat"><span class="dot"></span> Memories</span>
-            <span class="index">03</span>
-          </div>
-          <h3>Core <em>Memories</em>.</h3>
-          <p class="desc">
-            Record the moments that matter so you can relive them later. Each day
-            surfaces an old memory to enjoy — Readwise for life's greatest moments.
-          </p>
-          <ul class="features">
-            <li><span class="k">01</span><span>Capture moments as they happen.</span></li>
-            <li><span class="k">02</span><span>A daily resurfaced memory.</span></li>
-            <li><span class="k">03</span><span>Your own private archive to revisit.</span></li>
-          </ul>
-          <div class="why">
-            <span class="lbl">Why I built this</span>
-            <p>I believe gratitude is the real secret to being happy day to day. The little moments are actually the big ones, and this helps me notice them and hold on.</p>
-          </div>
-          <div class="foot"><span class="domain">corememories.us</span><span class="arrow">↗</span></div>
-        </a>
-
-        <a class="app reveal" href="https://watchlog.us" target="_blank" rel="noopener" data-screen-label="Apps / WatchLog">
-          <div class="top-row">
-            <span class="cat"><span class="dot"></span> Movies</span>
-            <span class="index">04</span>
-          </div>
-          <h3><em>WatchLog</em>.</h3>
-          <p class="desc">
-            Log the shows and films you watch so you can share with friends — or
-            ask AI what you should watch next.
-          </p>
-          <ul class="features">
-            <li><span class="k">01</span><span>A running log of everything you watch.</span></li>
-            <li><span class="k">02</span><span>Share your list with friends.</span></li>
-            <li><span class="k">03</span><span>AI recommendations for what's next.</span></li>
-          </ul>
-          <div class="why">
-            <span class="lbl">Why I built this</span>
-            <p>My wife spent years in the film industry and we're serious movie watchers. There's an ocean of great content out there — this helps me find the next thing and see what friends are watching, so it's almost always a hit.</p>
-          </div>
-          <div class="foot"><span class="domain">watchlog.us</span><span class="arrow">↗</span></div>
-        </a>
-
         <a class="app reveal" href="https://witsy.com" target="_blank" rel="noopener" data-screen-label="Apps / Witsy">
           <div class="top-row">
             <span class="cat"><span class="dot"></span> Coaching</span>
-            <span class="index">05</span>
+            <span class="index">03</span>
           </div>
           <h3><em>Witsy</em>.</h3>
           <p class="desc">
@@ -324,10 +285,112 @@
           <div class="foot"><span class="domain">witsy.com</span><span class="arrow">↗</span></div>
         </a>
 
+        <article class="app reveal" data-screen-label="Apps / ETW Course">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Course</span>
+            <span class="index">04</span>
+          </div>
+          <h3>ETW <em>Course</em>.</h3>
+          <p class="desc">
+            A course for founders on how to become a great CEO — the operating
+            frameworks and habits I coach, packaged into one place.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>The CEO frameworks I coach, structured.</span></li>
+            <li><span class="k">02</span><span>For founders growing into the role.</span></li>
+            <li><span class="k">03</span><span>Self-paced, built to actually apply.</span></li>
+          </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I've spent years coaching founders on how to grow into great CEOs. This packages the frameworks and habits I teach so far more founders can get to them — not just the ones I work with one-on-one.</p>
+          </div>
+          <div class="foot"><span class="private">Coming soon</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONAL -->
+  <section data-screen-label="Apps / For life">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="label"><span class="eyebrow">For life</span></div>
+        <h2>Apps for my <em>personal life</em>.</h2>
+      </div>
+
+      <div class="apps">
+
+        <a class="app reveal" href="https://mealbuddy.us" target="_blank" rel="noopener" data-screen-label="Apps / MealBuddy">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Health &amp; Nutrition</span>
+            <span class="index">05</span>
+          </div>
+          <h3><em>MealBuddy</em>.</h3>
+          <p class="desc">
+            Log food and meals using just your camera, see your weekly nutrition
+            stats, then chat with AI about your habits and get suggestions.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Log any meal by pointing your camera.</span></li>
+            <li><span class="k">02</span><span>Weekly nutrition stats at a glance.</span></li>
+            <li><span class="k">03</span><span>Chat with AI about your habits.</span></li>
+          </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I'm almost 50 now, and I pay a lot closer attention to what goes into my body. This keeps an honest eye on my diet and nudges me toward eating better.</p>
+          </div>
+          <div class="foot"><span class="domain">mealbuddy.us</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://watchlog.us" target="_blank" rel="noopener" data-screen-label="Apps / WatchLog">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Movies</span>
+            <span class="index">06</span>
+          </div>
+          <h3><em>WatchLog</em>.</h3>
+          <p class="desc">
+            Log the shows and films you watch so you can share with friends — or
+            ask AI what you should watch next.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>A running log of everything you watch.</span></li>
+            <li><span class="k">02</span><span>Share your list with friends.</span></li>
+            <li><span class="k">03</span><span>AI recommendations for what's next.</span></li>
+          </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>My wife spent years in the film industry and we're serious movie watchers. There's an ocean of great content out there — this helps me find the next thing and see what friends are watching, so it's almost always a hit.</p>
+          </div>
+          <div class="foot"><span class="domain">watchlog.us</span><span class="arrow">↗</span></div>
+        </a>
+
+        <a class="app reveal" href="https://corememories.us" target="_blank" rel="noopener" data-screen-label="Apps / Core Memories">
+          <div class="top-row">
+            <span class="cat"><span class="dot"></span> Memories</span>
+            <span class="index">07</span>
+          </div>
+          <h3>Core <em>Memories</em>.</h3>
+          <p class="desc">
+            Record the moments that matter so you can relive them later. Each day
+            surfaces an old memory to enjoy — Readwise for life's greatest moments.
+          </p>
+          <ul class="features">
+            <li><span class="k">01</span><span>Capture moments as they happen.</span></li>
+            <li><span class="k">02</span><span>A daily resurfaced memory.</span></li>
+            <li><span class="k">03</span><span>Your own private archive to revisit.</span></li>
+          </ul>
+          <div class="why">
+            <span class="lbl">Why I built this</span>
+            <p>I believe gratitude is the real secret to being happy day to day. The little moments are actually the big ones, and this helps me notice them and hold on.</p>
+          </div>
+          <div class="foot"><span class="domain">corememories.us</span><span class="arrow">↗</span></div>
+        </a>
+
         <article class="app reveal" data-screen-label="Apps / Guitar practice">
           <div class="top-row">
             <span class="cat"><span class="dot"></span> Music</span>
-            <span class="index">06</span>
+            <span class="index">08</span>
           </div>
           <h3>Guitar <em>practice</em>.</h3>
           <p class="desc">
@@ -351,7 +414,7 @@
       <div class="apps-note reveal">
         <div>
           <h3>Built something you'd <em>use</em>?</h3>
-          <p>These started as tools for my own daily life. If one's useful to you, take it for a spin — or reach out if you'd like to talk about it.</p>
+          <p>Some of these started as tools for my own work and life. If one's useful to you, take it for a spin — or reach out if you'd like to talk about it.</p>
         </div>
         <a href="contact.html" class="btn">Get in touch <span class="arrow">→</span></a>
       </div>
