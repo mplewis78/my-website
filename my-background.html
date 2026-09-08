@@ -228,9 +228,8 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      margin-top: 36px;
-      padding-top: 36px;
-      border-top: 1px solid var(--rule);
+      margin-top: 32px;
+      margin-bottom: 48px;
     }
     @media (max-width: 700px) {
       .logo-strip { grid-template-columns: repeat(2, 1fr); }
@@ -421,6 +420,50 @@
         </div>
       </div>
 
+      <!-- LOGO STRIP -->
+      <div class="logo-strip reveal" aria-label="Companies">
+        <div class="logo-slot">
+          <image-slot
+            id="logo-airbnb"
+            src="images/Logos/Airbnb%20logo.png"
+            shape="rect"
+            fit="cover"
+            placeholder="Airbnb logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Airbnb</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-kapost"
+            src="images/Logos/kapost-clean.png"
+            shape="rect"
+            fit="contain"
+            placeholder="Kapost logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Kapost</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-qloud"
+            src="images/Logos/qloud-clean.png"
+            shape="rect"
+            fit="contain"
+            placeholder="Qloud logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Qloud</span>
+        </div>
+        <div class="logo-slot">
+          <image-slot
+            id="logo-onward"
+            src="images/Logos/onward-clean.png"
+            shape="rect"
+            fit="contain"
+            placeholder="Onward logo (SVG)">
+          </image-slot>
+          <span class="logo-fallback">Onward</span>
+        </div>
+      </div>
+
       <div class="career reveal">
 
         <div class="role">
@@ -490,49 +533,6 @@
 
       </div>
 
-      <!-- LOGO STRIP -->
-      <div class="logo-strip reveal" aria-label="Companies">
-        <div class="logo-slot">
-          <image-slot
-            id="logo-airbnb"
-            src="images/Logos/Airbnb%20logo.png"
-            shape="rect"
-            fit="cover"
-            placeholder="Airbnb logo (SVG)">
-          </image-slot>
-          <span class="logo-fallback">Airbnb</span>
-        </div>
-        <div class="logo-slot">
-          <image-slot
-            id="logo-kapost"
-            src="images/Logos/kapost-clean.png"
-            shape="rect"
-            fit="contain"
-            placeholder="Kapost logo (SVG)">
-          </image-slot>
-          <span class="logo-fallback">Kapost</span>
-        </div>
-        <div class="logo-slot">
-          <image-slot
-            id="logo-qloud"
-            src="images/Logos/qloud-clean.png"
-            shape="rect"
-            fit="contain"
-            placeholder="Qloud logo (SVG)">
-          </image-slot>
-          <span class="logo-fallback">Qloud</span>
-        </div>
-        <div class="logo-slot">
-          <image-slot
-            id="logo-onward"
-            src="images/Logos/onward-clean.png"
-            shape="rect"
-            fit="contain"
-            placeholder="Onward logo (SVG)">
-          </image-slot>
-          <span class="logo-fallback">Onward</span>
-        </div>
-      </div>
 
     </div>
   </section>
