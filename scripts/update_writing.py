@@ -174,38 +174,16 @@ def make_mnl_items(items: list[dict]) -> str:
     return '\n\n'.join(parts)
 
 
-# Simple keyword → tag mapping for advisor posts
-TAG_MAP = [
-    (['fundrais', 'investor', 'vc ', 'raise', 'pitch', 'seed', 'series'],  'strategy'),
-    (['network', 'cold email', 'community'],                                 'strategy'),
-    (['team', 'hiring', 'culture', 'people'],                                'org'),
-    (['leader', 'manage', 'execut'],                                         'leadership'),
-    (['psycholog', 'mindset', 'emotion', 'founder'],                         'founder-psychology'),
-    (['decision', 'choice', 'tradeoff'],                                     'decisions'),
-]
-
-def tag_for(title: str, desc: str) -> tuple[str, str]:
-    """Return (data-tag, display-tag) for an advisor post."""
-    text = (title + ' ' + desc).lower()
-    for keywords, tag in TAG_MAP:
-        if any(kw in text for kw in keywords):
-            display = tag.replace('-', ' ').title()
-            return tag, display
-    return 'strategy', 'Strategy'
-
-
 def make_advisor_posts(items: list[dict]) -> str:
     parts = []
     for item in items:
-        _, tag_label = tag_for(item['title'], item['desc'])
         e_link  = html_mod.escape(item['link'])
         e_date  = html_mod.escape(item['date'])
         e_title = html_mod.escape(item['title'])
         e_desc  = html_mod.escape(item['desc'])
-        e_tag   = html_mod.escape(tag_label)
         parts.append(
             f'            <a class="mnl-item" href="{e_link}" target="_blank" rel="noopener">\n'
-            f'              <span class="ndate">{e_date}<span class="tag">{e_tag}</span></span>\n'
+            f'              <span class="ndate">{e_date}</span>\n'
             f'              <div>\n'
             f'                <h3>{e_title}</h3>\n'
             f'                <p class="preview">{e_desc}</p>\n'
