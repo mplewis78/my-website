@@ -10,11 +10,14 @@ Can also be run manually:  python3 scripts/update_writing.py
 """
 
 import html as html_mod
+import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from email.utils import parsedate_to_datetime
 
 # Path to writing.html relative to this script
@@ -33,13 +36,51 @@ DESC_MAX = 220      # characters for preview text
 # Helpers
 # ---------------------------------------------------------------------------
 
+BROWSER_HEADERS = {
+    'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+                   'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'),
+    'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
+    'Accept-Language': 'en-US,en;q=0.9',
+}
+
+
 def fetch(url: str) -> str:
-    req = urllib.request.Request(
-        url,
-        headers={'User-Agent': 'Mozilla/5.0 (compatible; site-updater/1.0)'}
-    )
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
     with urllib.request.urlopen(req, timeout=30) as resp:
         return resp.read().decode('utf-8')
+
+
+def items_from_relay(feed_url: str, n: int) -> list[dict]:
+    """Fallback: Substack often blocks GitHub's servers (HTTP 403), so fetch the
+    feed through rss2json.com, which reads it from its own servers."""
+    api = 'https://api.rss2json.com/v1/api.json?rss_url=' + urllib.parse.quote(feed_url, safe='')
+    data = json.loads(fetch(api))
+    if data.get('status') != 'ok':
+        raise RuntimeError(f"relay status {data.get('status')}: {data.get('message')}")
+    items = []
+    for it in data.get('items', [])[:n]:
+        try:
+            dt = datetime.strptime(it.get('pubDate', ''), '%Y-%m-%d %H:%M:%S')
+            date_fmt = dt.strftime('%b %-d, %Y')
+        except Exception:
+            date_fmt = ''
+        items.append({
+            'title': html_mod.unescape((it.get('title') or '').strip()),
+            'link': (it.get('link') or '').strip(),
+            'desc': clean_html(it.get('description') or ''),
+            'date': date_fmt,
+            'preview': extract_link_titles(it.get('content') or ''),
+        })
+    return items
+
+
+def get_items(feed_url: str, n: int) -> list[dict]:
+    """Try Substack directly, then the relay. Raises if both fail."""
+    try:
+        return parse_items(fetch(feed_url), n=n)
+    except Exception as e:
+        print(f'  Direct fetch failed ({e}); trying relay…')
+    return items_from_relay(feed_url, n)
 
 
 def clean_html(text: str, maxlen: int = DESC_MAX) -> str:
@@ -184,12 +225,12 @@ def main():
         html = f.read()
 
     changed = False
+    failures = 0
 
     # --- Mike & Ned's Links ---
     try:
         print('Fetching Mike & Ned RSS…')
-        mnl_xml = fetch(MNL_FEED)
-        mnl_items = parse_items(mnl_xml, n=MNL_N)
+        mnl_items = get_items(MNL_FEED, MNL_N)
         if not mnl_items:
             print('  No MNL items found, skipping.')
         else:
@@ -213,12 +254,12 @@ def main():
             changed = True
     except Exception as e:
         print(f'  ERROR fetching MNL feed: {e}', file=sys.stderr)
+        failures += 1
 
     # --- Advisor posts ---
     try:
         print('Fetching advisor RSS…')
-        advisor_xml = fetch(ADVISOR_FEED)
-        advisor_items = parse_items(advisor_xml, n=ADVISOR_N)
+        advisor_items = get_items(ADVISOR_FEED, ADVISOR_N)
         if not advisor_items:
             print('  No advisor items found, skipping.')
         else:
@@ -237,6 +278,7 @@ def main():
             changed = True
     except Exception as e:
         print(f'  ERROR fetching advisor feed: {e}', file=sys.stderr)
+        failures += 1
 
     if changed:
         with open(WRITING_HTML, 'w', encoding='utf-8') as f:
@@ -244,6 +286,11 @@ def main():
         print('writing.html saved.')
     else:
         print('No changes made.')
+
+    # Fail the run (red X + GitHub email) if any feed couldn't be read,
+    # instead of silently reporting success.
+    if failures:
+        sys.exit(f'{failures} feed(s) failed to load — see errors above.')
 
 
 if __name__ == '__main__':
