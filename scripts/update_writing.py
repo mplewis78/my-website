@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -80,7 +81,17 @@ def get_items(feed_url: str, n: int) -> list[dict]:
         return parse_items(fetch(feed_url), n=n)
     except Exception as e:
         print(f'  Direct fetch failed ({e}); trying relay…')
-    return items_from_relay(feed_url, n)
+    # The relay occasionally returns a transient HTTP 500, so retry a few times.
+    delays = [0, 10, 30]
+    for attempt, delay in enumerate(delays, 1):
+        if delay:
+            time.sleep(delay)
+        try:
+            return items_from_relay(feed_url, n)
+        except Exception as e:
+            print(f'  Relay attempt {attempt}/{len(delays)} failed ({e})')
+            if attempt == len(delays):
+                raise
 
 
 def clean_html(text: str, maxlen: int = DESC_MAX) -> str:
