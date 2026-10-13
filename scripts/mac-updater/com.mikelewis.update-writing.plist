@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.mikelewis.update-writing</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>__HOME__/Library/Scripts/update-writing.sh</string>
+  </array>
+  <!-- Tuesdays at 9:00 AM. If the Mac is asleep then, it runs when it wakes. -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>2</integer>
+    <key>Hour</key><integer>9</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>__HOME__/Library/Logs/update-writing.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/Library/Logs/update-writing.log</string>
+</dict>
+</plist>

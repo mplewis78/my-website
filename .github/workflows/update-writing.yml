@@ -1,12 +1,8 @@
 name: Update writing page from Substack
 
 on:
-  # Run every Tuesday at 10 AM UTC
-  # (Mike & Ned typically publishes Monday/Tuesday)
-  schedule:
-    - cron: '0 10 * * 2'
-
-  # Allow manual trigger from the Actions tab
+  # The weekly schedule now runs on Mike's Mac (scripts/mac-updater), because
+  # Substack blocks GitHub's servers and the free relays. Manual runs only here.
   workflow_dispatch:
 
 jobs:
