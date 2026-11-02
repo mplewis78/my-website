@@ -219,7 +219,10 @@ def main():
     # --- Mike & Ned's Links ---
     try:
         print('Fetching Mike & Ned RSS…')
-        mnl_items = get_items(MNL_FEED, MNL_N)
+        # The feed sometimes carries one-off posts (no "No. 123" in the title).
+        # Fetch a few extra and keep only the numbered weekly issues.
+        mnl_items = get_items(MNL_FEED, MNL_N + 6)
+        mnl_items = [it for it in mnl_items if re.search(r'No\.?\s*\d+', it['title'])][:MNL_N]
         if not mnl_items:
             print('  No MNL items found, skipping.')
         else:
