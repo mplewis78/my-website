@@ -27,36 +27,40 @@
     }
     .client {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 40px;
-      padding: 40px 0;
+      grid-template-columns: 320px 1fr;
+      gap: 48px;
+      padding: 48px 0;
       border-bottom: 1px solid var(--rule);
       align-items: start;
     }
     @media (max-width: 760px) {
-      .client { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+      .client { grid-template-columns: 1fr; gap: 24px; padding: 36px 0; }
     }
 
     .client .who {
       display: flex;
-      gap: 18px;
-      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
     }
     .client .avatar {
-      flex: 0 0 64px;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+      flex: 0 0 auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 16px;
       background: var(--paper-3);
       border: 1px solid var(--rule-strong);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--mono);
-      font-size: 15px;
+      font-size: 54px;
       letter-spacing: 0.06em;
       color: var(--accent-ink);
       overflow: hidden;
+    }
+    @media (max-width: 760px) {
+      .client .avatar { width: 280px; height: 280px; max-width: 100%; }
     }
     .client .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .client .avatar.pair {
@@ -64,15 +68,15 @@
       background: none; border: none; overflow: visible; display: flex;
     }
     .client .avatar.pair img {
-      width: 56px; height: 56px; border-radius: 50%;
-      border: 2px solid var(--paper); object-fit: cover; display: block;
+      width: 190px; height: 190px; border-radius: 16px;
+      border: 3px solid var(--paper); object-fit: cover; display: block;
     }
-    .client .avatar.pair img + img { margin-left: -18px; }
+    .client .avatar.pair img + img { margin-left: -48px; }
     .client .who-text { display: flex; flex-direction: column; gap: 6px; }
     .client .name {
       font-family: var(--serif);
-      font-size: 21px;
-      line-height: 1.1;
+      font-size: 24px;
+      line-height: 1.15;
       letter-spacing: -0.012em;
       color: var(--ink);
     }
@@ -179,20 +183,6 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar"><img src="images/clients/madeline-fraser.png" alt="Madeline Fraser"></div>
-            <div class="who-text">
-              <span class="name">Madeline Fraser</span>
-              <span class="duration">3 months</span>
-            </div>
-          </div>
-          <div class="detail">
-            <span class="company">Gemist — AI and Website SaaS for the Jewelry Industry</span>
-            <p class="body">80% of all jewelry is custom designed. Gemist lets jewelry retailers work with clients faster and more easily by using AI to create images and mockups for customers, both in-person and on the web. She also connects jewelers to brands and manufacturers of stones, and is in the middle of raising a round with the largest jewelry insurer. Madeline is a repeat founder. She lives in Ojai and runs a working farm — vineyard, chickens, and all.</p>
-          </div>
-        </div>
-
-        <div class="client reveal">
-          <div class="who">
             <div class="avatar">ME</div>
             <div class="who-text">
               <span class="name">Max Eisendrath</span>
@@ -263,20 +253,6 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar"><img src="images/kyle%20headshot.jpeg" alt="Kyle"></div>
-            <div class="who-text">
-              <span class="name">Kyle</span>
-              <span class="duration">9 months</span>
-            </div>
-          </div>
-          <div class="detail">
-            <span class="company">Wild West Social House — Membership Club &amp; Fashion Rental</span>
-            <p class="body">A Rent the Runway meets Soho House — a boutique membership in LA that lets people rent high-fashion gear (bags, shoes, clothes) and also attend fun events like poker nights and a Coachella tent. They have celebrities and stylists as customers and are growing nicely, with plans for ecommerce and New York next. Kyle is both a former male model and a huge growth-mindset data nerd.</p>
-          </div>
-        </div>
-
-        <div class="client reveal">
-          <div class="who">
             <div class="avatar"><img src="images/clients/jake-hirabayashi.png" alt="Jake Hirabayashi"></div>
             <div class="who-text">
               <span class="name">Jake Hirabayashi</span>
@@ -291,20 +267,6 @@
 
         <div class="client reveal">
           <div class="who">
-            <div class="avatar"><img src="images/clients/shazil-mehkri.png" alt="Shazil Mehkri"></div>
-            <div class="who-text">
-              <span class="name">Shazil Mehkri</span>
-              <span class="duration">44 months</span>
-            </div>
-          </div>
-          <div class="detail">
-            <span class="company">Sastaticket — Online Travel</span>
-            <p class="body">The leading online travel booking platform in Pakistan, coming up on its 10th anniversary. Shazil is bringing U.S. tactics to the Pakistani market. Growth is slow but they're profitable, and as the market matures, they should scale accordingly. Shazil loves to watch and train for MMA, and has two daughters and one dog (Bernie Sanders).</p>
-          </div>
-        </div>
-
-        <div class="client reveal">
-          <div class="who">
             <div class="avatar pair"><img src="images/clients/jake-yurek.png" alt="Jake Yurek"><img src="images/clients/evan-anderson.png" alt="Evan Anderson"></div>
             <div class="who-text">
               <span class="name">Jake Yurek &amp; Evan Anderson</span>
@@ -314,20 +276,6 @@
           <div class="detail">
             <span class="company">Pearl Edison — Home Electrification Marketplace</span>
             <p class="body">College friends from Notre Dame building a marketplace that connects homeowners with vetted contractors for home electrification — heat pumps, hot water, weatherization — partnering with utilities to make it easy. We just started working together in August, so we're still getting to know each other.</p>
-          </div>
-        </div>
-
-        <div class="client reveal">
-          <div class="who">
-            <div class="avatar"><img src="images/clients/jori-bell.png" alt="Jori Bell"></div>
-            <div class="who-text">
-              <span class="name">Jori Bell</span>
-              <span class="duration">12 months</span>
-            </div>
-          </div>
-          <div class="detail">
-            <span class="company">Hampton — Founder Community</span>
-            <p class="body">She's the Head of Product for Hampton's core groups — groups of 8 founders that meet monthly. A good product leader (former Amazon and Spotify) and former full-time coach of founders, she's about to leave for maternity leave from October to January.</p>
           </div>
         </div>
 
